@@ -1,0 +1,447 @@
+{
+    "resources": [
+        {
+            "name": "localService/metadata.xml"
+        },
+        {
+            "name": "localService/mockserver.js"
+        },
+        {
+            "name": "localService/mockserver-dbg.js"
+        },
+        {
+            "name": "view/imgDialog.fragment.xml"
+        },
+        {
+            "name": "view/Freetext.view.xml"
+        },
+        {
+            "name": "view/CatalogGrid.fragment.xml"
+        },
+        {
+            "name": "view/Account_Asisgnment_Detail.view.xml"
+        },
+        {
+            "name": "view/SourceOfSupply.fragment.xml"
+        },
+        {
+            "name": "view/Object.view.xml"
+        },
+        {
+            "name": "view/AddReview.fragment.xml"
+        },
+        {
+            "name": "view/SearchResults.fragment.xml"
+        },
+        {
+            "name": "view/CatalogList.fragment.xml"
+        },
+        {
+            "name": "view/NoserachResult.fragment.xml"
+        },
+        {
+            "name": "view/AssignedSupplier.fragment.xml"
+        },
+        {
+            "name": "view/PurReqList.view.xml"
+        },
+        {
+            "name": "view/App.view.xml"
+        },
+        {
+            "name": "view/FilterSearch.fragment.xml"
+        },
+        {
+            "name": "view/NotFound.view.xml"
+        },
+        {
+            "name": "view/ObjectNotFound.view.xml"
+        },
+        {
+            "name": "view/ProductDetails.view.xml"
+        },
+        {
+            "name": "view/approverBusinessCard.fragment.xml"
+        },
+        {
+            "name": "view/MassChange.fragment.xml"
+        },
+        {
+            "name": "view/PriceRange.fragment.xml"
+        },
+        {
+            "name": "view/Supplier.fragment.xml"
+        },
+        {
+            "name": "view/ItemDetails.view.xml"
+        },
+        {
+            "name": "view/PopoverCart.fragment.xml"
+        },
+        {
+            "name": "view/CartOverview.view.xml"
+        },
+        {
+            "name": "view/Search.view.xml"
+        },
+        {
+            "name": "images/beneering2.jpg"
+        },
+        {
+            "name": "images/dummyImg.png"
+        },
+        {
+            "name": "images/Capture.JPG"
+        },
+        {
+            "name": "Component-dbg.js"
+        },
+        {
+            "name": "css/Purchase.css"
+        },
+        {
+            "name": "css/Purchase-dbg.css"
+        },
+        {
+            "name": "version.json"
+        },
+        {
+            "name": "model/formatter-dbg.js"
+        },
+        {
+            "name": "model/models-dbg.js"
+        },
+        {
+            "name": "model/formatter.js"
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "misc/URLproperties-dbg.js"
+        },
+        {
+            "name": "misc/URLproperties.js"
+        },
+        {
+            "name": "misc/DataAccess.js"
+        },
+        {
+            "name": "misc/ExternalPurchasing-dbg.js"
+        },
+        {
+            "name": "misc/MassChange-dbg.js"
+        },
+        {
+            "name": "misc/URLGenerators-dbg.js"
+        },
+        {
+            "name": "misc/EntityConstants.js"
+        },
+        {
+            "name": "misc/DataAccess-dbg.js"
+        },
+        {
+            "name": "misc/EntityConstants-dbg.js"
+        },
+        {
+            "name": "misc/DataManager-dbg.js"
+        },
+        {
+            "name": "misc/MassChange.js"
+        },
+        {
+            "name": "misc/URLGenerators.js"
+        },
+        {
+            "name": "misc/DataManager.js"
+        },
+        {
+            "name": "misc/ExternalPurchasing.js"
+        },
+        {
+            "name": "annotations/annotations.xml"
+        },
+        {
+            "name": "controller/Search.controller.js"
+        },
+        {
+            "name": "controller/App-dbg.controller.js"
+        },
+        {
+            "name": "controller/PurReqList-dbg.controller.js"
+        },
+        {
+            "name": "controller/ItemDetails-dbg.controller.js"
+        },
+        {
+            "name": "controller/ProductDetails.controller.js"
+        },
+        {
+            "name": "controller/ProductDetails-dbg.controller.js"
+        },
+        {
+            "name": "controller/ErrorHandler.js"
+        },
+        {
+            "name": "controller/PurReqList.controller.js"
+        },
+        {
+            "name": "controller/ItemDetails.controller.js"
+        },
+        {
+            "name": "controller/Freetext-dbg.controller.js"
+        },
+        {
+            "name": "controller/App.controller.js"
+        },
+        {
+            "name": "controller/ErrorHandler-dbg.js"
+        },
+        {
+            "name": "controller/Account_Asisgnment_Detail-dbg.controller.js"
+        },
+        {
+            "name": "controller/Freetext.controller.js"
+        },
+        {
+            "name": "controller/CartOverview.controller.js"
+        },
+        {
+            "name": "controller/Account_Asisgnment_Detail.controller.js"
+        },
+        {
+            "name": "controller/BaseController-dbg.js"
+        },
+        {
+            "name": "controller/CartOverview-dbg.controller.js"
+        },
+        {
+            "name": "controller/Search-dbg.controller.js"
+        },
+        {
+            "name": "controller/BaseController.js"
+        },
+        {
+            "name": "controller/ZAttachment.controller.js"
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "fragment/Attachment.fragment.xml"
+        },
+        {
+            "name": "fragment/sFinAccountAssignment.fragment.xml"
+        },
+        {
+            "name": "fragment/BusinessProcess.fragment.xml"
+        },
+        {
+            "name": "fragment/ItemStatus.fragment.xml"
+        },
+        {
+            "name": "fragment/StatusInPR.fragment.xml"
+        },
+        {
+            "name": "fragment/AccountAssignment.fragment.xml"
+        },
+        {
+            "name": "fragment/PRHistory.fragment.xml"
+        },
+        {
+            "name": "fragment/AccountingDetails.fragment.xml"
+        },
+        {
+            "name": "fragment/PopOver.fragment.xml"
+        },
+        {
+            "name": "fragment/ZAttachment.fragment.xml"
+        },
+        {
+            "name": "i18n/i18n_kk.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_de.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_en.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_sk.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_lt.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_pt.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_uk.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_zh_CN.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_en_US_saptrc.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_sh.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_et.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_it.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_th.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_hu.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_el.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_sv.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_iw.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_hi.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_lv.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_fi.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_ru.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_es.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_cs.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_ms.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_nl.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_bg.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_tr.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_vi.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_en_US_sappsd.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_hr.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_da.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_ca.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_ja.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_fr.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_pl.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_ro.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_sl.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_zh_TW.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_no.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_ar.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n_ko.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "resources.json",
+            "merged": true
+        },
+        {
+            "name": "neo-app.json"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": ".project.json"
+        }
+    ]
+}

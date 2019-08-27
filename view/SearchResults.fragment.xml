@@ -1,0 +1,90 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<!-- Search Results fragment -->
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:l="sap.ui.layout"
+ xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:smartField="sap.ui.comp.smartfield"
+ xmlns:smartForm="sap.ui.comp.smartform" xmlns:smartTable="sap.ui.comp.smarttable" xmlns:table="sap.ui.table" xmlns:u="sap.ui.unified"
+ xmlns="sap.m">
+ <VBox class="sapUiMediumMarginBeginEnd">
+  <smartTable:SmartTable class="sapUiMediumMarginTop" demandPopin="true" enableAutoBinding="true" header="Results" id="" showRowCount="true"
+   tableType="ResponsiveTable" useTablePersonalisation="true" useVariantManagement="true">
+   <smartTable:customToolbar >
+    <Toolbar class="" height="45px">
+     <Title class="" id="" level="H2" text="{i18n>RESULTSTEXT}" titleStyle="H4"/>
+     <ToolbarSpacer/>
+     <Button class="" icon="sap-icon://sort" press="onSortReview" tooltip="{i18n>sortingTooltip}" type="Transparent"/>
+    </Toolbar>
+   </smartTable:customToolbar>
+   <Table class="sapUiSmallMarginBottom" enableBusyIndicator="true" fixedLayout="false" growing="true" growingScrollToLoad="false"
+    growingThreshold="20" id="searchTable" inset="false" items="{ path : '', key : 'OpnCtlgItemID'}" press="ProductDetails" updateFinished="onUpdateFinished">
+    <columns class="">
+     <Column class="" hAlign="Left" id="" vAlign="Top" width="6rem">
+      <header></header>
+     </Column>
+     <Column class="sapUiSmallMarginBottom sapUiSmallMarginTop" demandPopin="true" hAlign="Left" id="" minScreenWidth="Tablet" vAlign="Top">
+      <header></header>
+     </Column>
+     <Column demandPopin="true" hAlign="Left" id="" minScreenWidth="Tablet" vAlign="Top">
+      <header></header>
+     </Column>
+     <Column demandPopin="true" hAlign="Right" id="" minScreenWidth="Tablet" vAlign="Top">
+      <header></header>
+     </Column>
+    </columns>
+    <ColumnListItem class="sapUiSmallMarginBottom sapUiSmallMarginTop" id="" press="ProductDetails" type="Navigation" vAlign="middle">
+     <cells>
+      <VBox class="sapUiSmallMarginEnd sapUiSmallMarginTopBottom ">
+       <Image class="" densityAware="false" height="6em" press="ViewDetails"
+        src="{path: 'OpnCtlgMainImageURL', formatter: '.formatter.imgnotfound'}" width="6em"/>
+      </VBox>
+     </cells>
+     <cells class="">
+      <VBox class="sapUiSmallMarginTop">
+       <Label design="Bold" text="{ProductDescription}"/>
+       <Label text="{OpnCtlgWebServiceName}"/>
+       <Label text="{OpnCtlgSupplierName}"/>
+       <Label text=""></Label>
+       <RatingIndicator class="sapUiSmallMarginBottom" enabled="false" iconSize="0.8rem" maxValue="5"
+        value="{ path: 'UsageRating', formatter: '.formatter.rating' }"/>
+      </VBox>
+     </cells>
+     <cells>
+      <Text class="sapUiSmallMarginTop" text="{OpnCtlgSrchLongText}"/>
+     </cells>
+     <cells></cells>
+     <cells>
+      <VBox class="sapUiMediumMarginEnd sapUiSmallMarginTop">
+       <FlexBox alignItems="Start" class="" justifyContent="End">
+        <VBox class="sapUiSmallMarginEnd">
+         <ObjectNumber  class="" number="{parts:[{path:'OpnCtlgItemPrice'},{path:'Decimals'}], formatter:'.formatter.priceformat'}" textAlign="Right"
+          unit="{parts: [{path: 'OpnCtlgItemCurrency'}, {path:'Currency'}]}"/>
+         <Label
+          text="{parts:[{path:'i18n>CurrencyPer'},{path:'NetPriceQuantity',type : 'sap.ui.model.odata.type.Decimal'},{path:'PurchasingDocumentPriceUnit',type : 'sap.ui.model.odata.type.Decimal'},
+          {path:'UnitOfMeasure'},{path:'PurchasingDocumentOrderQty'}],formatter:'.formatter.orderunit'}"/>
+        </VBox>
+        <VBox>
+         <HBox>
+          <!--<Input class="sapUiTinyMarginBottom" textAlign="Right" value="{OpnCtlgMinOrderQuantity}" width="5rem"/>-->
+          <smartField:SmartField class="sapThemeText-asBorderColor" showValueStateMessage="true" textAlign="Right" value="{OpnCtlgMinOrderQuantity}"
+           width="5rem"/>
+          <Label class="sapUiTinyMarginTop sapUiTinyMarginBegin" text="{parts:[{path:'UnitOfMeasure'},{path:'BaseUnit'}]}" textAlign="Right"/>
+         </HBox>
+         <Link class="sapUiTinyMarginBottom" press="PricescaleClick"
+          text="{ path: 'OpnCtlgHasPriceScale', formatter: '.formatter.priceRange' }"/>
+        </VBox>
+       </FlexBox>
+       <FlexBox alignItems="Start" class="" direction="" justifyContent="End">
+        <items>
+         <Button class="" press="addToCart" text="{i18n>addToCart}" type="Emphasized"/>
+        </items>
+       </FlexBox>
+      </VBox>
+     </cells>
+    </ColumnListItem>
+   </Table>
+  </smartTable:SmartTable>
+ </VBox>
+</core:FragmentDefinition>

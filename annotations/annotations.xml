@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+ <edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/UI.xml">
+  <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+ </edmx:Reference>
+ <edmx:Reference Uri="/sap/opu/odata/sap/MMPUR_REQ_SSP_MAINTAIN_SRV/$metadata">
+  <edmx:Include Alias="MMPUR_REQ_SSP_MAINTAIN_SRV" Namespace="MMPUR_REQ_SSP_MAINTAIN_SRV"/>
+ </edmx:Reference>
+ <edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/Communication.xml">
+  <edmx:Include Alias="vCard" Namespace="com.sap.vocabularies.Communication.v1"/>
+ </edmx:Reference>
+ <edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/Common.xml">
+  <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+ </edmx:Reference>
+ <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/vocabularies/Org.OData.Core.V1.xml">
+  <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+ </edmx:Reference>
+ <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Measures.V1.xml">
+  <edmx:Include Alias="CQP" Namespace="Org.OData.Measures.V1"/>
+ </edmx:Reference>
+ <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Capabilities.V1.xml">
+  <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+ </edmx:Reference>
+ <edmx:Reference Uri="http://docs.oasis-open.org/odata/odata-data-aggregation-ext/v4.0/cs02/vocabularies/Org.OData.Aggregation.V1.xml">
+  <edmx:Include Alias="Aggregation" Namespace="Org.OData.Aggregation.V1"/>
+ </edmx:Reference>
+ <edmx:DataServices>
+  <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm">
+   <!--===============================================================================
+                Entity Type from chosen collection 
+                ================================================================================-->
+   <Annotations Target="MMPUR_REQ_SSP_MAINTAIN.C_Procurementitems">
+    <Annotation Term="UI.QuickViewFacets">
+     <Collection>
+       <Record Type="UI.ReferenceFacet">
+        <PropertyValue Property="Value" AnnotationPath="@UI.FieldGroup.#QUICK_VIEW"/>
+       </Record>
+     </Collection>
+      </Annotation>
+      <Annotation Term="UI.FieldGroup" Qualifier="QUICK_VIEW">
+     <PropertyValue property="Data">
+       <Collection>
+        <PropertyValue Property="ImageUrl" Path="OpnCtlgMainImageURL"/>
+         <Record Type="UI.DataField">
+        <PropertyValue Property="Value" Path="ProductDescription"/>
+       </Record>
+        <Record Type="UI.DataField">
+        <PropertyValue Property="Value" Path="OpnCtlgSrchLongText"/>
+       </Record>
+        </Collection>
+       </PropertyValue>
+    </Annotation>
+   </Annotations>
+      <Annotations Target="MMPUR_REQ_SSP_MAINTAIN.C_SSPPRMAINT_ITM">
+        <Annotation Term="UI.QuickViewFacets">
+     <Collection>
+       <Record Type="UI.ReferenceFacet">
+        <PropertyValue Property="Value" AnnotationPath="@UI.FieldGroup.#QUICK_VIEW"/>
+       </Record>
+     </Collection>
+      </Annotation>
+      <Annotation Term="UI.FieldGroup" Qualifier="QUICK_VIEW">
+     <PropertyValue property="Data">
+       <Collection>
+         <Record Type="UI.DataField">
+        <PropertyValue Property="Value" Path="PurchaseRequisitionItemText"/>
+       </Record>
+        <Record Type="UI.DataField">
+        <PropertyValue Property="Value" Path="PurchaseRequisitionPrice"/>
+       </Record>
+        <Record Type="UI.DataField">
+        <PropertyValue Property="Value" Path="RequestedQuantity"/>
+       </Record>
+        <Record Type="UI.DataField">
+        <PropertyValue Property="Value" Path="TotalNetAmount"/>
+       </Record>
+        </Collection>
+       </PropertyValue>
+    </Annotation>
+   </Annotations>
+  </Schema>
+ </edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,4 @@
+/*
+ * Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+ */
+sap.ui.define(["ui/s2p/mm/requisition/maintain/s1/controller/BaseController","sap/ui/model/json/JSONModel",'sap/m/MessageBox',"ui/s2p/mm/requisition/maintain/s1/localService/mockserver"],function(B,J,M,a){"use strict";return B.extend("ui.s2p.mm.requisition.maintain.s1.controller.App",{onInit:function(){var v,s,o=this.getView().getBusyIndicatorDelay();v=new J({busy:true,delay:0});this.setModel(v,"appView");s=function(){v.setProperty("/busy",false);v.setProperty("/delay",o);};this.oModel=this.getAppModel();this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());this.getOwnerComponent().getModel().metadataLoaded().then(jQuery.proxy(s,this),jQuery.proxy(s,this));if(a.MockServerMode){this.setTestMode(true);}else{this.setTestMode(false);}}});});

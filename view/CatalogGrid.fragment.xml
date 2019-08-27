@@ -1,0 +1,27 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<!-- Catalog Grid -->
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns="sap.m">
+ <VBox class="sapUiSmallMarginTop">
+  <Toolbar class="sapUiMediumMarginBeginEnd sapUiSmallMarginTopBottom" height="3.5rem">
+   <Label design="Bold" level="H2" text="{i18n>launchCatalogs}"/>
+   <ToolbarSpacer/>
+   <Button alt="{i18n]catalogImage}" class="" icon="sap-icon://list" press="showCatalogList" type="Transparent"/>
+   <Button alt="{i18n]catalogImage}" class="" enabled="false" icon="sap-icon://grid" press="showGridCatalog" type="Emphasized"/>
+  </Toolbar>
+  <l:Grid class="sapUiSmallMarginBegin" content="{/UserCatalogSet}" defaultSpan="L2 M4 S12" id="" justifyContent="Center" position="Center">
+   <l:content class="" textAlign="Center">
+    <List class="" enableBusyIndicator="true" textAlign="Center">
+     <CustomListItem class="" press="onPressText" textAlign="Center">
+      <Image alt="{ServiceId}" class="sapUiTinyMarginTop sapUiTinyMarginBeginEnd" densityAware="true" height="12.5rem"
+       onerror="imgError(this)" press="CatalogWindowImg" src="{path: 'IconPath', formatter: '.formatter.imgnotfound'}" width="94%"/>
+      <Link class="sapUiTinyMargin" press="onPressText" text="{ServiceId}" textAlign="Center" width="94%"/>
+     </CustomListItem>
+    </List>
+   </l:content>
+  </l:Grid>
+ </VBox>
+</core:FragmentDefinition>

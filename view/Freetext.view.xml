@@ -1,0 +1,147 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<View controllerName="ui.s2p.mm.requisition.maintain.s1.controller.Freetext" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+ xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:smartField="sap.ui.comp.smartfield"
+ xmlns:smartForm="sap.ui.comp.smartform" xmlns="sap.m">
+ <semantic:FullscreenPage id="page" navButtonPress="onBack" showNavButton="true" title="{i18n>appTitleCreate}">
+  <semantic:customHeaderContent>
+   <!--<Button class="sapUiSmallMarginEnd" icon="sap-icon://cart" id="btnCart" press="onPressCart" text="{NumberOfItems}" tooltip="{i18n>PurReq}"/>-->
+   <Button class="sapUiSmallMarginEnd" icon="sap-icon://cart" id="btnCart" press="onPressCart" text="{NumberOfItems}"
+    ariaLabelledBy="numberofitems"/>
+   <core:InvisibleText id="numberofitems"/>
+  </semantic:customHeaderContent>
+  <semantic:content>
+   <l:Grid class="sapUiSmallMarginTop" defaultSpan="L12 M12 S12" width="auto">
+    <l:content>
+     <Panel class="sapUiResponsiveMargin sapUiNoContentPadding" width="auto">
+      <headerToolbar>
+       <Toolbar>
+        <Title level="H2" text="{i18n>generalData}" tooltip="{i18n>generalData}"/>
+        <ToolbarSpacer/>
+       </Toolbar>
+      </headerToolbar>
+      <f:SimpleForm class="editableForm" columnsL="2" editable="true" id="simpleForm" labelSpanL="4" labelSpanM="3" layout="ResponsiveGridLayout"
+       maxContainerCols="2">
+       <f:content>
+        <core:Title text=""/>
+        <smartField:SmartLabel labelFor="idMaterial"/>
+        <smartField:SmartField change="materialValidation" id="idMaterial" tooltip="{Material}" value="{Material}"/>
+        <smartField:SmartLabel labelFor="idExtMaterial"/>
+        <smartField:SmartField change="getExtMaterialDetails" id="idExtMaterial" tooltip="{Material}" value="{ExtMaterialForPurg}"/>
+        <smartField:SmartLabel labelFor="idMaterialDescription"/>
+        <smartField:SmartField change="descvalidation" id="idMaterialDescription" maxLength="40" showValueHelp="false" tooltip="{PurchaseRequisitionItemText}" value="{PurchaseRequisitionItemText}"/>
+        <smartField:SmartLabel labelFor="idMaterialGroup"/>
+        <FlexBox>
+         <smartField:SmartField change="matGrpValidation" id="idMaterialGroup" tooltip="{MaterialGroup}" value="{MaterialGroup}" width="10rem"/>
+         <Input class="sapUiTinyMarginBegin" enabled="false" id="idMaterialGroupText" type="Text" value="{MaterialGroup_Text}" width="98%">
+          <layoutData>
+           <FlexItemData growFactor="1"/>
+          </layoutData>
+         </Input>
+        </FlexBox>
+        <smartField:SmartLabel labelFor="price"/>
+        <smartField:SmartField change="priceValidation" id="price" mandatory="true"
+         value="{path : 'PurchaseRequisitionPrice',type : 'sap.ui.model.odata.type.Decimal'}"/>
+        <smartField:SmartLabel labelFor="quantity"/>
+        <smartField:SmartField change="quantityValidation" id="quantity"  value="{path: 'RequestedQuantity'}"/>
+        <smartField:SmartLabel labelFor="idDeliveryDate"/>
+        <smartField:SmartField id="idDeliveryDate"
+         tooltip="{path:'DeliveryDate' ,formatter:'.formatter.deliveryDateFormartting'}" value="{path: 'DeliveryDate'}"
+         visible="{path :'ProductType' , formatter:'.formartVisiblityDateSelector'}">
+         <smartField:configuration>
+          <smartField:Configuration controlType="datePicker" id="idDeliveryDatePicker"/>
+         </smartField:configuration>
+        </smartField:SmartField>
+        <core:Title text=""/>
+        <Label text="{i18n>generalType}" tooltip="{i18n>generalType}"/>
+        <!--<RadioButtonGroup select="selctedkey">
+                                                                                                                                                <buttons>
+                                                                                                                                                                <RadioButton id="productMaterial" text="{i18n>generalProductMaterial}"/>
+                                                                                                                                                                <RadioButton id="generalService" text="{i18n>generalService}"/>
+                                                                                                                                                </buttons>
+                                                                                                                                </RadioButtonGroup>-->
+        <Select change="selectionChanged" id="productTypeSelect" selectedKey='0'>
+         <core:Item key='0' text="{i18n>generalProductMaterial}" tooltip="{i18n>generalProductMaterial}"/>
+         <core:Item key='1' text="{i18n>generalService}" tooltip="{i18n>generalService}"/>
+        </Select>
+        <smartField:SmartLabel labelFor="idServicePerformer"/>
+        <smartField:SmartField id="idServicePerformer" tooltip="{i18n>ServicePerformer}" value="{ServicePerformer}" change="servicePerformerChange"
+         visible="{path :'ProductType' , formatter:'.formartServiceTypeVisiblity'}"/>
+        <Label labelFor="idDeliveryDateRange" text="{i18n>validityPeriod}" tooltip="{i18n>validityPeriod}"/>
+        <DateRangeSelection change="DateRangeValidation" dateValue="{path:'PerformancePeriodStartDate'}" id="idDeliveryDateRange"
+         secondDateValue="{path:'PerformancePeriodEndDate'}"
+         tooltip="{parts:[{path:'PerformancePeriodStartDate'},{path:'PerformancePeriodEndDate'}],formatter:'.formatter.miniCartDateRangeFormartting'}"
+         visible="{path :'ProductType' , formatter:'.formartServiceTypeVisiblity'}"/>
+       </f:content>
+      </f:SimpleForm>
+     </Panel>
+    </l:content>
+   </l:Grid>
+   <l:Grid defaultSpan="L12 M12 S12" width="auto">
+    <l:content>
+     <Panel class="sapUiMediumMarginBeginEnd sapUiNoContentPadding" id="sourceOfSupply" width="auto">
+      <headerToolbar>
+       <Toolbar>
+        <content>
+         <Title level="H2" text="{i18n>sourceOfSupply}" tooltip="{i18n>sourceOfSupply}"/>
+         <ToolbarSpacer/>
+         <Button icon="sap-icon://add" id="addSupplier1" press="onSupplier"/>
+        </content>
+       </Toolbar>
+      </headerToolbar>
+      <content>
+       <List noDataText="{i18n>supplier}" tooltip="{i18n>supplier}"></List>
+      </content>
+     </Panel>
+    </l:content>
+   </l:Grid>
+   <l:Grid defaultSpan="L12 M12 S12" width="auto">
+    <l:content>
+     <Panel id="zAttachments" width="auto">
+      <headerToolbar>
+       <Toolbar>
+        <content>
+         <Title level="H2" text="{i18n>Attachments}" tooltip="{i18n>Attachments}"/>
+        </content>
+       </Toolbar>
+      </headerToolbar>
+      <content>
+       <core:Fragment fragmentName="ui.s2p.mm.requisition.maintain.s1.fragment.ZAttachment" controller="ZAttachment" type="XML"/>
+      </content>
+     </Panel>
+    </l:content>
+   </l:Grid>
+   <l:Grid defaultSpan="L12 M12 S12" width="auto">
+    <l:content>
+     <Panel class="sapUiMediumMarginBeginEnd sapUiSmallMarginTop" width="auto" id="notes">
+      <headerToolbar>
+       <Toolbar>
+        <Title level="H2" text="{i18n>NOTES}" tooltip="{i18n>NOTES}"/>
+       </Toolbar>
+      </headerToolbar>
+      <IconTabBar applyContentPadding="false" expandable="false" expanded="true" id="idIconTabBarNoIcons" items="{/C_Sspprmaint_Itmtexttypes}"
+       select="onSelect">
+       <items>
+        <IconTabFilter key="{DocumentText}" text="{DocumentText_Text}" tooltip="{DocumentText_Text}">
+         <content>
+          <TextArea change="onChange" cols="400" id="textArea" rows="10" visible="true"/>
+         </content>
+        </IconTabFilter>
+       </items>
+      </IconTabBar>
+     </Panel>
+    </l:content>
+   </l:Grid>
+  </semantic:content>
+  <semantic:messagesIndicator>
+   <semantic:MessagesIndicator press="showMessageLogPopover"/>
+  </semantic:messagesIndicator>
+  <semantic:customFooterContent>
+   <Button class="sapUiSmallMarginEnd" id="addCart" press="handleAddtoCart" text="{i18n>addToCart}" tooltip="{i18n>addToCart}"
+    type="Emphasized"/>
+  </semantic:customFooterContent>
+ </semantic:FullscreenPage>
+</View>

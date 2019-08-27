@@ -1,0 +1,459 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<View controllerName="ui.s2p.mm.requisition.maintain.s1.controller.ItemDetails"
+ xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+ xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:process="sap.suite.ui.commons"
+ xmlns:semantic="sap.m.semantic" xmlns:smartField="sap.ui.comp.smartfield" xmlns:smartForm="sap.ui.comp.smartform" xmlns="sap.m">
+ <semantic:FullscreenPage class="sapUiFioriObjectPage" enableScrolling="true" height="100%" id="page" navButtonPress="onBack"
+  showNavButton="true" title="{i18n>itemDetails}">
+  <semantic:customHeaderContent>
+   <!--        <Button class="sapUiSmallMarginEnd" enabled="true" icon="sap-icon://cart" id="btnCart" text="" tooltip="{i18n]CART}" type="Emphasized"/>-->
+  </semantic:customHeaderContent>
+  <semantic:content>
+   <l:Grid class="sapUiSmallMarginTop" defaultSpan="L12 M12 S12" width="auto">
+    <l:content>
+     <Panel class="sapUiResponsiveMargin sapUiNoContentPadding" id="iPanelGeneralData" width="auto">
+      <headerToolbar>
+       <Toolbar>
+        <Title level="H2" text="{i18n>generalData}" tooltip="{i18n>generalData} "/>
+       </Toolbar>
+      </headerToolbar>
+      <smartForm:SmartForm app:defaultDropDownDisplayBehaviour="idAndDescription" class="editableForm" columnsL="4" columnsM="2" editable="true"
+       emptySpanL="8" emptySpanM="4" id="smartForm1" labelSpanL="3" labelSpanM="3" maxContainerCols="2">
+       <smartForm:Group>
+        <smartForm:GroupElement>
+         <smartField:SmartField change="materialValidation" editable="{viewProperties>/editable}" id="idProductId" tooltip="{Material}"
+          value="{Material}"></smartField:SmartField>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField change="extmaterialValidation" editable="{viewProperties>/editable}" id="idExtProductId" tooltip="{Material}"
+          value="{ExtMaterialForPurg}"></smartField:SmartField>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="idMaterialDescription" maxLength="40" showValueHelp="false"
+          tooltip="{PurchaseRequisitionItemText}" value="{PurchaseRequisitionItemText}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField change="selectionChangedDet" id="productTypeSelect"
+          tooltip="{parts:[{path:'PurchasingDocumentItemCategory'},{path:'ProductType'}],formatter:'.formartPurchasingDocumentItemCategory'}"
+          value="{parts:[{path:'PurchasingDocumentItemCategory'},{path:'ProductType'}],formatter:'.formartPurchasingDocumentItemCategory'}"
+          enabled="{path:'PurReqnSSPCatalog',formatter:'.checkDropDownEnabled'}">
+          <smartField:configuration>
+           <smartField:Configuration change="selectionChangedDet" controlType="selection" displayBehaviour="descriptionOnly"
+            enabled="{path : 'PurReqnSSPCatalog ',formatter :'.checkDropDownEnabled'}" tooltip="{PurReqnSSPCatalog}"/>
+          </smartField:configuration>
+         </smartField:SmartField>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField change = "onMaterialGroupUpdate" editable="{viewProperties>/editable}" id="idName" tooltip="{MaterialGroup}" value="{MaterialGroup}">
+          <!--<smartField:configuration>-->
+          <!-- <smartField:Configuration controlType="dropDownList" displayBehaviour="descriptionAndId"/>-->
+          <!--</smartField:configuration>-->
+         </smartField:SmartField>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField change="priceValidation" id="idPrice" mandatory="true" tooltip="{PurchaseRequisitionPrice}"
+          value="{path : 'PurchaseRequisitionPrice',type : 'sap.ui.model.odata.type.Currency'}" valueListChanged="sample"></smartField:SmartField>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField change="netPriceValidation" class="sapUiNoContentPadding" editable="{viewProperties>/editable}"
+          id="idNetPriceQuantity" tooltip="{NetPriceQuantity}" value="{NetPriceQuantity}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField change="quantityValidation" editable="{viewProperties>/editable}" id="idDescription" tooltip="{RequestedQuantity}"
+          value="{RequestedQuantity}" editableChanged="disableSections"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement id="l_prcscale" visible="false">
+         <Link id="" press="PricescaleClick" text="{i18n>pricescale}" textAlign="Right" tooltip="{i18n>pricescale}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="idDate"
+          tooltip="{path:'DeliveryDate' ,formatter:'.formatter.deliveryDateFormartting'}" value="{path: 'DeliveryDate'}"
+          visible="{path :'ProductType' , formatter:'.formartVisiblityDetailsDate'}">
+          <smartField:configuration>
+           <smartField:Configuration controlType="datePicker"/>
+          </smartField:configuration>
+         </smartField:SmartField>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField change="servicePerformerChange" editable="{viewProperties>/editable}" id="idServicePerformerDet"
+          tooltip="{ProductType}" value="{ServicePerformer}" visible="{path :'ProductType' , formatter:'.formartVisiblityDetailsPerformer'}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement label="{i18n>validityPeriod}" visible="{path :'ProductType' , formatter:'.formartVisiblityDetailsDateRange'}">
+         <DateRangeSelection dateValue="{path:'PerformancePeriodStartDate'}" editable="{viewProperties>/editable}" id="idDeliveryDateRangeDet"
+          change="DateRangeValidation" secondDateValue="{path:'PerformancePeriodEndDate'}"
+          tooltip="{parts:[{path:'PerformancePeriodStartDate'},{path:'PerformancePeriodEndDate'}],formatter:'.formatter.miniCartDateRangeFormartting'}"/>
+        </smartForm:GroupElement>
+       </smartForm:Group>
+       <smartForm:Group>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="idPurchasing" mandatory="false" tooltip="{PurchasingGroup}"
+          value="{PurchasingGroup}">
+          <!--<smartField:configuration>-->
+          <!-- <smartField:Configuration controlType="dropDownList" displayBehaviour="descriptionAndId"/>-->
+          <!--</smartField:configuration>-->
+         </smartField:SmartField>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="idPurchasingOrg" mandatory="false" tooltip="{PurchasingOrganization}"
+          value="{PurchasingOrganization}">
+          <!--<smartField:configuration>-->
+          <!-- <smartField:Configuration controlType="dropDownList" displayBehaviour="descriptionAndId"/>-->
+          <!--</smartField:configuration>-->
+         </smartField:SmartField>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="idExtPurchasingOrg" mandatory="false" tooltip="{PurchasingOrganization}"
+          value="{ExtPurgOrgForPurg}">
+          <!--<smartField:configuration>-->
+          <!-- <smartField:Configuration controlType="dropDownList" displayBehaviour="descriptionAndId"/>-->
+          <!--</smartField:configuration>-->
+         </smartField:SmartField>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="idCompany" tooltip="{CompanyCode}" value="{CompanyCode}"
+          initialise="changeName">
+          <!--<smartField:configuration>-->
+          <!-- <smartField:Configuration controlType="dropDownList" displayBehaviour="descriptionAndId"/>-->
+          <!--</smartField:configuration>-->
+         </smartField:SmartField>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="idExtCompany" tooltip="{CompanyCode}" value="{ExtCompanyCodeForPurg}"
+          initialise="changeName"></smartField:SmartField>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="idLocation" tooltip="{Plant}" value="{Plant}">
+          <!--<smartField:configuration>-->
+          <!-- <smartField:Configuration controlType="dropDownList" displayBehaviour="descriptionAndId"/>-->
+          <!--</smartField:configuration>-->
+         </smartField:SmartField>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="idExtLocation" value="{ExtPlantForPurg}">
+          <!--<smartField:configuration>-->
+          <!-- <smartField:Configuration controlType="dropDownList" displayBehaviour="descriptionAndId"/>-->
+          <!--</smartField:configuration>-->
+         </smartField:SmartField>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField change="onAccCategoryUpdate" editable="{viewProperties>/editable}" id="accAssCategory"
+          tooltip="{AccountAssignmentCategory}" value="{AccountAssignmentCategory}"/>
+        </smartForm:GroupElement>
+        <!--ADDED BY C4P!-->
+        <!--<smartForm:GroupElement label="{ZZPURCHREQ/#@sap:label}">-->
+        <!-- <Input editable="{viewProperties>/editable}" id="ZZPURCHREQ" tooltip="{ZZPURCHREQ}" value="{ZZPURCHREQ}" fieldWidth="75%"-->
+        <!--  showValueHelp="true" valueHelpRequest="vhr_ZZPURCHREQ" visible="{viewProperties>/visible}"/>-->
+        <!--</smartForm:GroupElement>-->
+        <!--<smartForm:GroupElement label="{ZZREQTILL/#@sap:label}">-->
+        <!-- <DatePicker id="ZZREQTILL"-->
+        <!--  value="{path: 'ZZREQTILL', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd.MM.yyyy', strictParsing: true , UTC: true}}" visible="{viewProperties>/visible}"/>-->
+        <!--</smartForm:GroupElement>-->
+        <!--ADDED BY C4P!-->
+       </smartForm:Group>
+      </smartForm:SmartForm>
+     </Panel>
+    </l:content>
+   </l:Grid>
+   <l:Grid defaultSpan="L12 M12 S12" width="auto">
+    <l:content>
+     <Panel class="sapUiResponsiveMargin sapUiNoContentPadding" id="idPanelDeliveryAddress" width="auto">
+      <headerToolbar>
+       <Toolbar>
+        <Title level="H2" text="{i18n>overviewDeliveryAddress}" tooltip="{i18n>overviewDeliveryAddress}"/>
+       </Toolbar>
+      </headerToolbar>
+      <smartForm:SmartForm app:defaultDropDownDisplayBehaviour="idAndDescription" class="editableForm" columnsL="2" columnsM="2" editable="true"
+       emptySpanL="4" emptySpanM="4" id="smartForm2" labelSpanL="3" labelSpanM="2" maxContainerCols="2">
+       <smartForm:Group>
+        <smartForm:GroupElement>
+         <smartField:SmartField id="idTitle" tooltip="{FormOfAddress}" value="{FormOfAddress}">
+          <smartField:configuration>
+           <smartField:Configuration controlType="selection" displayBehaviour="descriptionOnly"/>
+          </smartField:configuration>
+         </smartField:SmartField>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="fullName" tooltip="{FullName}" value="{FullName}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField change="validatePhone" editable="{viewProperties>/editable}" id="phone" tooltip="{PhoneNumber1}"
+          value="{PhoneNumber1}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField change="validateFax" editable="{viewProperties>/editable}" id="fax" tooltip="{FaxNumber}" value="{FaxNumber}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField MaxLength="241" change="validateEmail" editable="{viewProperties>/editable}" id="email" tooltip="{EmailAddress}"
+          type="Email" value="{EmailAddress}"/>
+        </smartForm:GroupElement>
+       </smartForm:Group>
+       <smartForm:Group>
+        <smartForm:GroupElement >
+         <smartField:SmartField editable="{viewProperties>/editable}" id="houseNo" tooltip="{AddressStreetName}" value="{AddressStreetName}"
+          initialise="setDefaultValue"/>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="houseNumber" tooltip="{AddressHouseNumber}" value="{AddressHouseNumber}"/>
+         <!--<Input id="houseNumber" text="{AddressHouseNumber}" width="100%"/>-->
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="district" tooltip="{AddressCityName}" value="{AddressCityName}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="poCity" tooltip="{AddressPostalCode}" value="{AddressPostalCode}"/>
+        </smartForm:GroupElement>
+        <!--<smartForm:GroupElement>-->
+        <!-- <smartField:SmartField editable="{viewProperties>/editable}" id="poBox" value="{AddressPostalCode}"/>-->
+        <!--</smartForm:GroupElement>-->
+        <!--<smartForm:GroupElement>-->
+        <!-- <smartField:SmartField editable="{viewProperties>/editable}" id="country" tooltip="{AddressCountry}" value="{AddressCountry}">-->
+        <!--  <smartField:configuration>-->
+        <!--   <smartField:Configuration controlType="dropDownList" displayBehaviour="descriptionAndId"/>-->
+        <!--  </smartField:configuration>-->
+        <!-- </smartField:SmartField>-->
+        <!--</smartForm:GroupElement>-->
+        <!--<smartForm:GroupElement>-->
+        <!-- <smartField:SmartField editable="{viewProperties>/editable}" id="region" tooltip="{AddressRegion}" value="{AddressRegion}">-->
+        <!--  <smartField:configuration>-->
+        <!--   <smartField:Configuration controlType="dropDownList" displayBehaviour="descriptionAndId"/>-->
+        <!--  </smartField:configuration>-->
+        <!-- </smartField:SmartField>-->
+        <!--</smartForm:GroupElement>-->
+        <smartForm:GroupElement>
+         <smartField:SmartField change="onChangeCountry" editable="{viewProperties>/editable}" id="country" tooltip="{AddressCountry}"
+          value="{AddressCountry}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="region" tooltip="{AddressRegion}" value="{AddressRegion}"/>
+        </smartForm:GroupElement>
+       </smartForm:Group>
+      </smartForm:SmartForm>
+     </Panel>
+    </l:content>
+   </l:Grid>
+   <l:Grid defaultSpan="L12 M12 S12" id="formAccAssignment" visible="false" width="auto">
+    <l:content>
+     <Panel class="sapUiResponsiveMargin sapUiNoContentPadding sapUiSmallMarginTopBottom" id="idPanelAccAssignment" width="auto">
+      <headerToolbar>
+       <Toolbar>
+        <Title level="H2" text="{i18n>accountingAssignment}" tooltip="{i18n>accountingAssignment}"/>
+       </Toolbar>
+      </headerToolbar>
+      <smartForm:SmartForm app:defaultDropDownDisplayBehaviour="idAndDescription" class="editableForm" columnsL="2" columnsM="2" editable="true"
+       emptySpanL="4" emptySpanM="4" id="smartForm3" labelSpanL="3" labelSpanM="2" maxContainerCols="2">
+       <smartForm:Group>
+        <smartForm:GroupElement>
+         <smartField:SmartField change="glAccountDescription" editable="{viewProperties>/editable}" id="glaAccount" tooltip="{GLAccount}"
+          value="{GLAccount}"/>
+         <smartField:SmartField editable="false" id="lblGLAccount" tooltip="{GLAccount_Text}" value="{GLAccount_Text}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="businessArea" tooltip="{BusinessArea}" value="{BusinessArea}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="commitmentItem" tooltip="{CommitmentItem}" value="{CommitmentItem}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="controllingArea" tooltip="{ControllingArea}" value="{ControllingArea}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="costCenter" tooltip="{CostCenter}" value="{CostCenter}"/>
+         <smartField:SmartField editable="false" id="costCenterDesc" tooltip="{CostCenter_Text}" value="{CostCenter_Text}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="fixedAsset" tooltip="{FixedAsset}" value="{FixedAsset}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="functionArea" tooltip="{FunctionalArea}" value="{FunctionalArea}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="funds" tooltip="{Fund}" value="{Fund}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="fundsCenter" tooltip="{FundsCenter}" value="{FundsCenter}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="masterFixedAsset" tooltip="{MasterFixedAsset}" value="{MasterFixedAsset}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="orderID" tooltip="{OrderID}" value="{OrderID}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="profitCenter" tooltip="{ProfitCenter}" value="{ProfitCenter}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="projectNetwork" tooltip="{ProjectNetwork}" value="{ProjectNetwork}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="networkActivity" tooltip="{NetworkActivity}" value="{NetworkActivity}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="sdDocument" tooltip="{SDDocument}" value="{SDDocument}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="sdItem" tooltip="{SalesDocumentItem}" value="{SalesDocumentItem}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="scheduleLine" tooltip="{ScheduleLine}" value="{ScheduleLine}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="profitSegment" tooltip="{ProfitabilitySegment}"
+          value="{ProfitabilitySegment}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="wbsElementID" tooltip="{WBSElementInternalID}"
+          value="{WBSElementInternalID}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="projectNetworkID" tooltip="{ProjectNetworkInternalID}"
+          value="{ProjectNetworkInternalID}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="goodsRecipientName" tooltip="{GoodsRecipientName}"
+          value="{GoodsRecipientName}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="networkActID" tooltip="{NetworkActivityInternalID}"
+          value="{NetworkActivityInternalID}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="orderIntID" tooltip="{OrderInternalID}" value="{OrderInternalID}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="OrderIntBillOpertnItem" tooltip="{OrderIntBillOfOperationsItem}"
+          value="{OrderIntBillOfOperationsItem}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="earmarkedFundsDoc" tooltip="{EarmarkedFundsDocument}"
+          value="{EarmarkedFundsDocument}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="costCtrActivityType" tooltip="{CostCtrActivityType}"
+          value="{CostCtrActivityType}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="businessProcess" tooltip="{BusinessProcess}" value="{BusinessProcess}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="grantID" tooltip="{GrantID}" value="{GrantID}"/>
+        </smartForm:GroupElement>
+        <smartForm:GroupElement>
+         <smartField:SmartField editable="{viewProperties>/editable}" id="unloadingPointName" tooltip="{UnloadingPointName}"
+          value="{UnloadingPointName}"/>
+        </smartForm:GroupElement>
+       </smartForm:Group>
+       <smartForm:Group></smartForm:Group>
+      </smartForm:SmartForm>
+     </Panel>
+    </l:content>
+   </l:Grid>
+   <l:Grid class="sapUiMediumMarginBeginEnd" defaultSpan="L12 M12 S12" id="listAccAssignment" visible="false" width="auto">
+    <l:content>
+     <core:Fragment fragmentName="ui.s2p.mm.requisition.maintain.s1.fragment.AccountAssignment" type="XML"/>
+    </l:content>
+   </l:Grid>
+   <!-- sFIN Accounting component -->
+   <l:Grid class="sapUiMediumMarginBeginEnd" defaultSpan="L12 M12 S12" id="sFinlistAccAssignment" visible="true" width="auto">
+    <l:content>
+     <core:Fragment fragmentName="ui.s2p.mm.requisition.maintain.s1.fragment.sFinAccountAssignment" type="XML"/>
+    </l:content>
+   </l:Grid>
+   <l:Grid class="sapUiMediumMarginBeginEnd" defaultSpan="L12 M12 S12" id="idPanelAttachments" width="auto">
+    <l:content>
+     <Panel id="zAttachments" width="auto">
+      <headerToolbar>
+       <Toolbar>
+        <content>
+         <Title level="H2" text="{i18n>Attachments}" tooltip="{i18n>Attachments}"/>
+        </content>
+       </Toolbar>
+      </headerToolbar>
+      <content>
+       <core:Fragment fragmentName="ui.s2p.mm.requisition.maintain.s1.fragment.ZAttachment" controller="ZAttachment" type="XML"/>
+      </content>
+     </Panel>
+    </l:content>
+   </l:Grid>
+   <l:Grid class="sapUiSmallMarginTop" defaultSpan="L12 M12 S12" width="auto">
+    <l:content>
+     <Panel class="sapUiResponsiveMargin sapUiNoContentPadding" width="auto">
+      <headerToolbar>
+       <Toolbar>
+        <Title level="H2" text="{i18n>sourceOfSupply}" tooltip="{i18n>sourceOfSupply}"/>
+        <ToolbarSpacer/>
+        <Button icon="sap-icon://add" id="addSupplier" tooltip="{i18n>addSourceOfSupply}" press="onSupplier"/>
+       </Toolbar>
+      </headerToolbar>
+      <Panel class="sapUiNoContentPadding" id="sourceOfSupply">
+       <content/>
+      </Panel>
+     </Panel>
+    </l:content>
+   </l:Grid>
+   <l:Grid class="sapUiResponsiveMargin sapUiNoContentPadding" defaultSpan="L12 M12 S12" id="processflow2" width="auto">
+    <l:content>
+     <Panel >
+      <headerToolbar>
+       <Toolbar>
+        <Title level="H2" text="{i18n>approvalProcessOverview}" tooltip="{i18n>approvalProcessOverview}"/>
+       </Toolbar>
+      </headerToolbar>
+      <process:ProcessFlow id="processflow1" lanes="{pf2>/oDataProcessFlow}" scrollable="false" zoomLevel="Two">
+       <process:lanes>
+        <process:ProcessFlowLaneHeader headerPress="onApproverClick" iconSrc="{pf2>icon}" laneId="{pf2>id}" position="{pf2>position}"
+         text="{parts : [{path:'pf2>label'},{path:'pf2>Userid'}], formatter:'.formatter.approvalText'}" tooltip="{pf2>label}"/>
+       </process:lanes>
+      </process:ProcessFlow>
+     </Panel>
+    </l:content>
+   </l:Grid>
+   <l:Grid class="sapUiResponsiveMargin" defaultSpan="L12 M12 S12" width="auto">
+    <l:content>
+     <Panel id="idPanelNotes" width="auto">
+      <headerToolbar>
+       <Toolbar>
+        <Title level="H2" text="{i18n>NOTES}" tooltip="{i18n>NOTES}"/>
+       </Toolbar>
+      </headerToolbar>
+      <IconTabBar applyContentPadding="false" expandable="false" expanded="true" id="idIconTabBarNoIcons" items="{Notes>/itemTextTypes}" >
+       <items>
+        <IconTabFilter key="{Notes>key}" text="{Notes>name}" tooltip="{Notes>name}">
+         <content>
+          <TextArea value="{Notes>value}" cols="400" id="textArea" placeholder="{i18n]SPACE}" rows="10" visible="true"/>
+         </content>
+        </IconTabFilter>
+       </items>
+      </IconTabBar>
+     </Panel>
+    </l:content>
+   </l:Grid>
+   <l:Grid class="sapUiSmallMarginTop" defaultSpan="L12 M12 S12" width="auto" visible="false" id="idItemLevelStatus">
+    <l:content>
+     <Panel class="sapUiResponsiveMargin sapUiNoContentPadding" width="auto">
+      <headerToolbar>
+       <Toolbar>
+        <Title level="H2" text="{i18n>itemLevelStatus}" tooltip="{i18n>itemLevelStatus}"/>
+        <ToolbarSpacer/>
+       </Toolbar>
+      </headerToolbar>
+      <Panel class="sapUiNoContentPadding" id="idItemStatus">
+       <core:ComponentContainer id="BusProcessCompContainerID" name="sap.s4.cfnd.lib.businessprocessflow.component.freestyle" propagateModel="true"
+        settings="\{&quot;layoutId&quot;:&quot;\{UIModel&gt;/key\}&quot;, &quot;docId&quot;:&quot;\{UIModel&gt;/key2\}&quot;, &quot;Item&quot;:&quot;\{UIModel&gt;/Item\}&quot;, &quot;KeyName&quot;:&quot;\{UIModel&gt;/KeyName\}&quot;, &quot;ItemKeyName&quot;:&quot;\{UIModel&gt;/ItemKeyName\}&quot;, &quot;FiscalYear&quot;:&quot;\{UIModel&gt;/FiscalYear\}&quot;, &quot;CompanyCode&quot;:&quot;\{UIModel&gt;/CompanyCode\}&quot;, &quot;FiscalYearKey&quot;:&quot;\{UIModel&gt;/FiscalYearKey\}&quot;, &quot;CompanyCodeKey&quot;:&quot;\{UIModel&gt;/CompanyCodeKey\}&quot; \}"/>
+      </Panel>
+     </Panel>
+    </l:content>
+   </l:Grid>
+  </semantic:content>
+  <semantic:messagesIndicator>
+   <semantic:MessagesIndicator press="showMessageLogPopover"/>
+  </semantic:messagesIndicator>
+  <semantic:customFooterContent>
+   <Button press="onPressSave" text="{i18n>save}" tooltip="{i18n>save}" type="Emphasized" id="idSaveButton"/>
+   <Button press="onPressApplyChange" text="{i18n>applyChanges}" id="idApplychangeButton"/>
+   <Button ariaDescribedBy="defaultButtonDescription genericButtonDescription" class="sapUiSmallMarginEnd" press="onPressDelete"
+    text="{i18n>overviewDelete}" tooltip="{i18n>overviewDelete}" type="Default" id="idDeleteButton"/>
+  </semantic:customFooterContent>
+ </semantic:FullscreenPage>
+</View>

@@ -1,0 +1,184 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<View controllerName="ui.s2p.mm.requisition.maintain.s1.controller.ProductDetails" id="ProductDetails" xmlns:core="sap.ui.core"
+ xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
+ xmlns:smartField="sap.ui.comp.smartfield" xmlns:smartForm="sap.ui.comp.smartform" xmlns="sap.m">
+ <semantic:FullscreenPage id="page" navButtonPress="onBack" showNavButton="true" title="{i18n>productDetails}">
+  <semantic:customHeaderContent>
+   <Button class="sapUiSmallMarginEnd" icon="sap-icon://cart" id="btnCart" press="onPressCart" text="{NumberOfItems}"/>
+  </semantic:customHeaderContent>
+  <semantic:content>
+   <ObjectHeader class="sapUiMediumMarginBeginEnd" id="idHeader"
+    number="{parts:[{path:'OpnCtlgItemPrice'},{path:'Decimals'}], formatter:'.formatter.priceformat', type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+    numberUnit="{parts:[{path:'OpnCtlgItemCurrency'},{path:'Currency'} ]}" title="{ProductDescription}">
+    <statuses>
+     <ObjectStatus state="Success" text="{ path: 'LeadTimeAnncmntDueInDays', formatter: '.formatter.formatDeliveryDays' }"/>
+    </statuses>
+   </ObjectHeader>
+   <l:Grid busyIndicatorDelay="0" class="sapUiMediumMarginBeginEnd" defaultSpan="L6 M12 S12" id="productDetails">
+    <l:content>
+     <IconTabBar class="sapUiNoMarginBegin sapUiNoMarginEnd" expandable="false" expanded="true" id="iconTabbar" select="handleTabSelect"
+      width="100%">
+      <items>
+       <IconTabFilter id="general" key="generalkey" expanded="true" text="{i18n>tabTitle1}">
+        <l:Grid defaultSpan="L6 M6 S12" width="auto">
+         <l:content>
+          <f:SimpleForm id="articleDetailsid" labelSpanM="4" layout="ResponsiveGridLayout" maxContainerCols="2" title="{i18n>articleDetails}">
+           <f:content>
+            <Label text="{i18n>description}"/>
+            <Text text="{OpnCtlgSrchLongText}"/>
+            <Label class="sapUiTinyMarginTop" text="{i18n>reviewRating}"/>
+            <HBox class="sapUiNoContentPadding">
+             <RatingIndicator enabled="false" iconSize="0.7rem" id="rating" maxValue="5" value="{ path: 'UsageRating', formatter: '.formatter.rating' }"/>
+             <Text class="sapUiTinyMarginTop" id="reviewCount" text="{()}"/>
+            </HBox>
+            <Label text="{i18n>productSupplier}"/>
+            <Text text="{OpnCtlgSupplierName}"/>
+            <Label text="{i18n>productManufacturer}"/>
+            <Text text="{ManufacturerName}"/>
+            <Label text="{i18n>SupplierProductNumber}"/>
+            <Text text="{OpnCtlgMaterialIDByVendor}"/>
+            <Label text="{i18n>productManufacturerNum}"/>
+            <Text text="{ManufacturerMaterial}"/>
+            <Label text="{i18n>productCategory}"/>
+            <Text text="{MaterialGroup}"/>
+            <Label text="{i18n>catalog} "/>
+            <Text text="{OpnCtlgWebServiceName}"/>
+           </f:content>
+          </f:SimpleForm>
+          <f:SimpleForm id="productImageid" labelSpanM="4" layout="ResponsiveGridLayout" maxContainerCols="2" title="{i18n>productImages}">
+           <f:content>
+            <Carousel height="18rem" id="carousel" loop="true" pages="{path: '/I_CatalogItemAttachment'}">
+             <pages>
+              <Image alt="{i18n>catalogImage}" class="" densityAware="false" height="10rem"
+               src="{path: 'OpnCtlgMainImageURL', formatter: '.formatter.imgnotfound'}" width="10rem"/>
+             </pages>
+            </Carousel>
+           </f:content>
+          </f:SimpleForm>
+          <f:SimpleForm id="orderDetailsid" labelSpanM="4" layout="ResponsiveGridLayout" title="{i18n>orderDetails}">
+           <f:content>
+            <Label text="{i18n>unitMeasure} "/>
+            <Text text="{parts:[{path:'UnitOfMeasure'},{path:'BaseUnit'}]}"/>
+            <Label text="{i18n>minQuantity} "/>
+            <Text text="{OpnCtlgMinOrderQuantity}"/>
+            <Label text="{i18n>lotSize} "/>
+            <Text text="{MaterialFixedLotSizeQuantity}"/>
+           </f:content>
+          </f:SimpleForm>
+          <f:SimpleForm id="priceDetailsid" labelSpanM="4" layout="ResponsiveGridLayout" maxContainerCols="2" title="{i18n>priceDetails}">
+           <f:content>
+            <Label text="{i18n>tax} "/>
+            <Text text="{ path: 'TaxTolerancePercent', formatter: '.formatter.tax'}"/>
+            <Label text="{i18n>priceValidFrom} "/>
+            <Text text="{ path: 'OpnCtlgPrcValidityStartDate', formatter: '.formatter.date' }"/>
+            <Label text="{i18n>priceValidTo} "/>
+            <Text text="{ path: 'OpnCtlgPrcValidityEndDate', formatter: '.formatter.date' }"/>
+           </f:content>
+          </f:SimpleForm>
+         </l:content>
+        </l:Grid>
+       </IconTabFilter>
+       <IconTabFilter class="sapUiResponsiveContentPadding" id="sustainabilityTab" text="{i18n>tabTitle2}" key="tab2">
+        <f:SimpleForm columnsL="12" emptySpanL="9" layout="ResponsiveGridLayout">
+         <f:content>
+          <Label text="{i18n>sustainabilityIndicator} "/>
+          <Text id="sustainability" text="{OpnCtlgItemSustainCompliance}"/>
+          <Label text="{i18n>directEmission} "/>
+          <Text id="directEms" text="{OpnCtlgDirectEmissionValue}"/>
+          <Label text="{i18n>indirectEmission} "/>
+          <Text id="indirectEms" text="{OpnCtlgIndrctEmissionValue}"/>
+          <Label text="{i18n>thirdPartyEmission} "/>
+          <Text id="tempEms" text="{OpnCtlgTempEmissionValue}"/>
+          <Label text="{i18n>recycleContent} "/>
+          <Text id="recycleContent" text="{OpnCtlgRecycleValue}"/>
+          <Label text="{i18n>waterConsumption} "/>
+          <Text id="waterUsage" text="{OpnCtlgWaterConsumptionValue}"/>
+          <Label text="{i18n>energyConsumption} "/>
+          <Text id="energyUsage" text="{OpnCtlgEnergyConsumptionValue}"/>
+          <Label text="{i18n>wasteGenerated} "/>
+          <Text id="waste" text="{OpnCtlgWasteGeneratedValue}"/>
+         </f:content>
+        </f:SimpleForm>
+       </IconTabFilter>
+       <IconTabFilter id="technicalDetails" text="{i18n>tabTitle3}">
+        <content>
+         <Text id="idAttribute" textAlign="Center"/>
+        </content>
+       </IconTabFilter>
+       <IconTabFilter class="sapUiNoContentPadding" id="reviewsTab" key="review" text="{i18n>tabTitle4}">
+        <Table class="sapUiNoContentPadding" growingScrollToLoad="true" growingThreshold="10" id="idReviewTable" inset="false"
+         items="{path: '/C_Reviews'}" noDataText="{i18n>noReviewText}" updateFinished="onUpdateFinished">
+         <headerToolbar>
+          <Toolbar>
+           <ToolbarSpacer/>
+           <Button enabled="true" icon="sap-icon://add" id="btnAddReview" press="onAddReview" tooltip="{i18n>AddReview}"/>
+           <Button icon="sap-icon://sort" press="onSortReview" tooltip="{i18n>sortReview}"/>
+          </Toolbar>
+         </headerToolbar>
+         <columns>
+          <Column vAlign="Top" width="6rem"></Column>
+          <Column hAlign="Right" vAlign="Top" width="8rem"></Column>
+          <Column demandPopin="true" hAlign="Left" minScreenWidth="Tablet" vAlign="Top"></Column>
+         </columns>
+         <ColumnListItem id="idreviewColumns">
+          <cells>
+           <RatingIndicator class="sapUiTinyMarginTop" enabled="false" iconSize="1rem" maxValue="5"
+            value="{path: 'UsageRating', formatter: '.formatter.rating' }"/>
+           <Label class="sapUiTinyMarginTopBottom" design="Bold" text="{path: 'UserID', formatter: '.formatter.totalText'}" textAlign="Right"
+            tooltip="{UserID}"/>
+           <VBox class="sapUiTinyMarginTopBottom">
+            <Text text="{path: 'ReviewedByUser'}"/>
+            <HBox class="sapUiTinyMarginTopBottom">
+             <Label level="H6" text="{i18n>Posted}" textAlign="End"/>
+             <ObjectIdentifier level="H5" text="{path: 'ChangedDateTime', formatter: '.formatter.reviewDate' }"/>
+            </HBox>
+           </VBox>
+          </cells>
+         </ColumnListItem>
+        </Table>
+       </IconTabFilter>
+       <IconTabFilter class="sapUiNoContentPadding" id="prcscltab" key="prcScl" text="{i18n>tabTitle5}">
+        <Table class="sapUiMediumMargin" id="idPrcSclTable" items="{ path : ''}" vAlign="center" visible="true" width="35%">
+         <columns>
+          <Column demandPopin="true" hAlign="Right" minScreenWidth="Phone" width="40%">
+           <Text text="{i18n>quantity}"></Text>
+          </Column>
+          <Column demandPopin="true" hAlign="Center" minScreenWidth="Phone">
+           <Text
+            text="{parts:[{path:'i18n>CurrencyPer'},{path:'NetPriceQuantity',type : 'sap.ui.model.odata.type.Decimal'},{path:'UnitOfMeasure'}], formatter:'.formatter.formatPer'}"></Text>
+          </Column>
+         </columns>
+         <ColumnListItem id="prcScalColList">
+          <cells>
+           <Text text="{parts : [{path:'DomainValueLow'},{path:'DomainValueHigh'}], formatter:'.formatter.pricerangelimit'}"></Text>
+           <FlexBox alignItems="Start" class="" direction="" justifyContent="Center">
+            <HBox>
+             <Label design="Bold" text="{OpnCtlgItemPrice}"></Label>
+             <Text class="sapUiTinyMarginBegin" text="{Currency}"></Text>
+            </HBox>
+           </FlexBox>
+          </cells>
+         </ColumnListItem>
+        </Table>
+       </IconTabFilter>
+      </items>
+      <layoutData>
+       <l:GridData linebreakM="true" linebreakS="true" span="L12 M12 S12"/>
+      </layoutData>
+     </IconTabBar>
+    </l:content>
+   </l:Grid>
+  </semantic:content>
+  <semantic:messagesIndicator>
+   <semantic:MessagesIndicator press="showMessageLogPopover"/>
+  </semantic:messagesIndicator>
+  <semantic:customFooterContent>
+   <Button class="sapUiSmallMarginEnd" id="idAddToCart" press="addToCart" text="{i18n>addToCart}" type="Emphasized" visible="false"/>
+   <Button icon="sap-icon://action" press="handlePopoverPress"/>
+  </semantic:customFooterContent>
+ </semantic:FullscreenPage>
+</View>

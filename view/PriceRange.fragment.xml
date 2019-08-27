@@ -1,0 +1,40 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+ <ResponsivePopover class="sapUiPopupWithPadding" contentWidth="400px" placement="Left" title="{i18n>pricescale}">
+  <endButton>
+   <Button enabled="false"/>
+  </endButton>
+  <content>
+   <Table class="" items="{ path : ''}" visible="true" width="auto">
+    <columns>
+     <Column demandPopin="true" hAlign="Right" id="" minScreenWidth="Phone">
+      <Text text="{i18n>quantity}"></Text>
+     </Column>
+     <Column demandPopin="true" hAlign="Right" id="" minScreenWidth="Phone" width="200px">
+      <Text text="{i18n>price}"></Text>
+     </Column>
+    </columns>
+    <items>
+     <ColumnListItem>
+      <cells>
+       <Text text="{parts : [{path:'DomainValueLow'},{path:'DomainValueHigh'}], formatter:'.formatter.pricerangelimit'}"></Text>
+      </cells>
+      <cells>
+       <!--<Text text="{parts : [{path:'OpnCtlgItemPrice'},{path:'Currency'}], formatter:'.formatter.appendCurrency'}"></Text>-->
+       <FlexBox alignItems="Start" class="" direction="" justifyContent="End">
+        <HBox>
+         <Label design="Bold" text="{OpnCtlgItemPrice}"></Label>
+         <Text class="sapUiTinyMarginBegin" text="{Currency}"></Text>
+        </HBox>
+       </FlexBox>
+      </cells>
+     </ColumnListItem>
+    </items>
+   </Table>
+  </content>
+ </ResponsivePopover>
+</core:FragmentDefinition>

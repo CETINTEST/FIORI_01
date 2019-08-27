@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition xmlns:time="sap.suite.ui.commons" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+ xmlns:smartField="sap.ui.comp.smartfield" xmlns="sap.m">
+ <Popover class="" id="itemspopover" placement="Right" title="{i18n>itemStatus}" afterClose="handleClose">
+  <content>
+   <Panel>
+    <headerToolbar>
+     <Toolbar>
+      <Button icon="sap-icon://zoom-in" text="{i18n>zoomIn}" press="processFlowZoomIn"/>
+      <Button icon="sap-icon://zoom-out" text="{i18n>zoomOut}" press="processFlowZoomOut"/>
+     </Toolbar>
+    </headerToolbar>
+    <!--<Label text="Process flow for Status in MY PR"></Label>-->
+    <time:ProcessFlow id="processflow" scrollable="true" foldedCorners="true" nodePress="onNodePress" nodes="{pf1>/nodes}" lanes="{pf1>/lanes}">
+     <time:nodes>
+      <time:ProcessFlowNode laneId="{pf1>lane}" nodeId="{pf1>id}" title="{pf1>title}" titleAbbreviation="{pf1>titleAbbreviation}"
+       children="{pf1>children}" state="{pf1>state}" stateText="{pf1>stateText}" texts="{pf1>texts}" focused="{pf1>focused}"/>
+     </time:nodes>
+     <time:lanes>
+      <time:ProcessFlowLaneHeader laneId="{pf1>id}" iconSrc="{pf1>icon}" text="{pf1>label}" position="{pf1>position}"/>
+     </time:lanes>
+    </time:ProcessFlow>
+   </Panel>
+  </content>
+ </Popover>
+</core:FragmentDefinition>

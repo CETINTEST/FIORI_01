@@ -1,0 +1,130 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<View controllerName="ui.s2p.mm.requisition.maintain.s1.controller.CartOverview" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+ xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:page="sap.m.page" xmlns:semantic="sap.m.semantic"
+ xmlns:smartField="sap.ui.comp.smartfield" xmlns:smartForm="sap.ui.comp.smartform" xmlns:smartTable="sap.ui.comp.smarttable"
+ xmlns:table="sap.ui.table" xmlns:ui="sap.ca.ui" xmlns="sap.m">
+ <semantic:FullscreenPage id="page" navButtonPress="onBack" showNavButton="true" title="{i18n>overviewTitle}">
+  <semantic:customHeaderContent>
+   <Button class="sapUiSmallMarginEnd" enabled="false" icon="sap-icon://cart" id="btnCart" text="{NumberOfItems}" tooltip="{i18n>PurReq}"/>
+  </semantic:customHeaderContent>
+  <semantic:content>
+   <VBox class="sapUiSmallMarginBeginEnd">
+    <ObjectHeader
+     number="{parts:[{path:'TotalNetAmount'},{path:'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+     numberUnit="{Currency}" title="{path:'EmployeeFullName', formatter: '.formatter.setTitle'}" unit="{Currency}">
+     <statuses>
+      <ObjectStatus state="Success" text="{PurReqnLifeCycleStatusName}"/>
+     </statuses>
+     <attributes>
+      <ObjectAttribute text="{PurchaseRequisition}"/>
+     </attributes>
+    </ObjectHeader>
+    <f:SimpleForm class="editableForm sapUiRespGrid sapUiRespGridHSpace1" columnsL="2" editable="true" emptySpanL="8"
+     layout="ResponsiveGridLayout" title="{i18n>overviewGeneral}">
+     <f:content>
+      <Label text="{i18n>overviewPRName}" tooltip="{i18n>overviewPRName}"/>
+      <!--<Input change="onPRNameChanged" editable="false" id="PRName" tooltip="{i18n>PurReqnDescription}"-->
+      <!-- value="{PurReqnDescription}"></Input>-->
+      <smartField:SmartField change="onPRNameChanged" id="PRName" tooltip="{i18n>PurReqnDescription}" value="{PurReqnDescription}"/>
+     </f:content>
+    </f:SimpleForm>
+    <l:Grid defaultSpan="L12 M12 S12" width="auto">
+     <l:content>
+      <!--<Title class="sapUiSmallMarginBegin sapUiSmallMarginTop sapUiSmallMarginBottom" design="Bold" id="table" level="H3" text="{i18n>ITEMS}"/>-->
+      <Table delete="deleteItemPressed" growing="true" growingScrollToLoad="false" growingThreshold="10" id="productsTable" inset="false"
+       mode="Delete" updateFinished="onUpdateFinished">
+       <headerToolbar>
+        <Toolbar>
+         <Title design="Bold" id="table" level="H3" text="{i18n>ITEMS}" tooltip="{i18n>ITEMS}"/>
+        </Toolbar>
+       </headerToolbar>
+       <columns>
+        <Column hAlign="Left" width="8rem">
+         <header></header>
+        </Column>
+        <Column demandPopin="true" hAlign="Left" minScreenWidth="Tablet" width="20rem">
+         <header><Label text="{i18n>description}" textAlign="Center" tooltip="{i18n>description}"/></header>
+        </Column>
+        <Column demandPopin="true" hAlign="Center" minScreenWidth="Tablet">
+         <header><Label text="{i18n>Status}" textAlign="Center" tooltip="{i18n>Status}" visible="false"/></header>
+        </Column>
+        <Column demandPopin="true" hAlign="Right" minScreenWidth="Tablet" width="12rem" id="quantityColumn">
+         <header><Label text="{i18n>overviewQuantity}" tooltip="{i18n>overviewQuantity}"/></header>
+        </Column>
+        <Column demandPopin="true" hAlign="Right" minScreenWidth="Desktop" width="12rem">
+         <header><Label text="{i18n>overviewUnitPrice}" tooltip="{i18n>overviewUnitPrice}"/></header>
+        </Column>
+        <Column hAlign="Right" width="8rem">
+         <header><Label text="{i18n>overviewSubTotal}" tooltip="{i18n>overviewSubTotal}"/></header>
+        </Column>
+       </columns>
+       <ColumnListItem id="columnListItem" press="onCartItemPressed" type="Navigation">
+        <cells>
+         <HBox class="sapUiSmallMarginTopBottom">
+          <Image densityAware="false" height="6em" press="ViewDetails" src="{path: 'OpnCtlgMainImageURL', formatter: '.formatter.imgnotfound'}"
+           width="6em"/>
+         </HBox>
+         <VBox class="sapUiContentPadding">
+          <Link class="sapUiTinyMarginBottom" press="ViewDetails" text="{PurchaseRequisitionItemText}"></Link>
+
+             <HBox>
+                 <Label text="{path:'i18n>overviewSupplierName', formatter:'.formatter.reviewID'}" tooltip="{i18n>overviewSupplierName}" ></Label>
+           <Text class="sapUiTinyMarginBegin" text="{path:'SupplierName'}" width="80em"></Text>
+          </HBox>
+          <HBox>
+           <Label text="{path:'i18n>overviewSupplier', formatter:'.formatter.reviewID'}" tooltip="{i18n>overviewSupplier}"></Label>
+           <Text class="sapUiTinyMarginBegin" text="{parts:[{path:'FixedSupplier'},{path:'Supplier'},{path:'ExtFixedSupplierForPurg'},{path:'ExtDesiredSupplierForPurg'},{path:'ExtInfoRecordForPurg'},{path:'ExtContractForPurg'}],formatter:'.formatter.Supplier' }"
+            tooltip="{FixedSupplier}"></Text>
+                            </HBox>
+          <HBox visible="{path: 'ProductType', formatter: '.formatter.formartOnMaterialVisibility'}">
+           <Label text="{path:'i18n>overviewDelDate', formatter:'.formatter.reviewID'}" tooltip="{i18n>overviewDelDate}"></Label>
+           <Text class="sapUiTinyMarginBegin" text="{path: 'DeliveryDate',type: 'sap.ui.model.type.Date',formatOptions:{style: 'short', UTC: true}}"
+            tooltip="{path:'DeliveryDate' ,formatter:'.formatter.deliveryDateFormartting'}"></Text>
+          </HBox>
+          <HBox visible="{path: 'ProductType', formatter: '.formatter.formartOnServiceVisibility' }">
+           <Label text="{path: 'i18n>validityPeriod', formatter : '.formatter.totalText'}"/>
+           <Text class="sapUiTinyMarginBegin"
+            text="{parts:[{path:'PerformancePeriodStartDate'},{path:'PerformancePeriodEndDate'}],formatter:'.formatter.miniCartDateRangeFormartting'}"/>
+          </HBox>
+         </VBox>
+         <VBox>
+          <Link text="{i18n>showStatus}" press="showStatus" id="idStatus" visible="false"/>
+         </VBox>
+         <VBox class="sapUiContentPadding">
+          <smartField:SmartField change="onQuantityChanged" controlType="dropDownList" editable="{viewProperties>/editable}" id="idQuantity"
+           textAlign="End" tooltip="{i18n>requestedQuantity}" value="{path:'RequestedQuantity', type:'sap.ui.model.type.Decimal'}"/>
+          <Link class="sapUiTinyMarginTop" id="cw_prcscale" press="PricescaleClick" text="{i18n>pricescale}" tooltip="{i18n>pricescale}"
+           visible="false"></Link>
+         </VBox>
+         <ObjectNumber emphasized="true"
+          number="{parts:[{path:'PurchaseRequisitionPrice'},{path:'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+          unit="{Currency}"/>
+         <ObjectNumber emphasized="true"
+          number="{parts:[{path:'TotalNetAmount'},{path:'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+          unit="{Currency}"/>
+        </cells>
+       </ColumnListItem>
+      </Table>
+     </l:content>
+    </l:Grid>
+   </VBox>
+  </semantic:content>
+  <semantic:messagesIndicator>
+   <semantic:MessagesIndicator class="sapUiMarginBegin" press="showMessageLogPopover"/>
+  </semantic:messagesIndicator>
+  <semantic:customFooterContent>
+   <Button class="sapUiSmallMarginEnd" enabled="false" id="btnConfirm" press="handleConfirmPress" text="{i18n>confirmGR}" visible="false"
+    tooltip="{i18n>confirmGR}"/>
+   <Button class="sapUiSmallMarginEnd" enabled="false" id="btnReturn" press="handleReturnPress" text="{i18n>returnGR}" visible="false"
+    tooltip="{i18n>returnGR}"/>
+   <Button enabled="false" id="btnCheckOut" press="handleOrderCartPress" text="{i18n>overviewOrder}" tooltip="{i18n>overviewOrder}"
+    type="Emphasized"/>
+   <Button class="sapUiSmallMarginEnd" enabled="false" id="btnDeleteCart" press="handleDeleteCartPress" text="{i18n>discard}"
+    tooltip="{i18n>overviewDelete}"/>
+  </semantic:customFooterContent>
+ </semantic:FullscreenPage>
+</View>
