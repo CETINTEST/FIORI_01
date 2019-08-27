@@ -1,0 +1,24 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<View controllerName="ui.s2p.mm.requisition.maintain.s1.controller.Account_Asisgnment_Detail" xmlns:core="sap.ui.core"
+ xmlns:l="sap.ui.layout" xmlns:semantic="sap.m.semantic" xmlns:smartForm="sap.ui.comp.smartform" xmlns="sap.m">
+ <semantic:FullscreenPage class="sapUiFioriObjectPage" enableScrolling="true" height="100%" id="page" navButtonPress="onBack"
+  showNavButton="true" title="{i18n>accountDetails}">
+  <semantic:customHeaderContent>
+   <!--        <Button class="sapUiSmallMarginEnd" enabled="true" icon="sap-icon://cart" id="btnCart" text="" tooltip="{i18n]CART}" type="Emphasized"/>-->
+  </semantic:customHeaderContent>
+  <semantic:content>
+   <l:Grid class="sapUiMediumMarginBeginEnd" defaultSpan="L12 M12 S12" id="idPanelAttachments" width="auto">
+    <l:content>
+     <core:Fragment fragmentName="ui.s2p.mm.requisition.maintain.s1.fragment.AccountingDetails" type="XML"/>
+    </l:content>
+   </l:Grid>
+  </semantic:content>
+  <semantic:customFooterContent>
+   <!--<Button press="onPressSave" text="{i18n>save}" type="Emphasized"/>-->
+  </semantic:customFooterContent>
+ </semantic:FullscreenPage>
+</View>

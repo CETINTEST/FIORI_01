@@ -1,0 +1,115 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<View controllerName="ui.s2p.mm.requisition.maintain.s1.controller.PurReqList" xmlns:core="sap.ui.core"
+ xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
+ xmlns:smartTable="sap.ui.comp.smarttable" xmlns:smartfilterbar="sap.ui.comp.smartfilterbar" xmlns:table="sap.ui.table" xmlns="sap.m">
+ <Page enableScrolling="true" id="page" navButtonPress="onNavBack" showNavButton="true" title="{i18n>MainTitle}">
+  <content>
+   <smartfilterbar:SmartFilterBar basicSearchFieldName="searchField" class="sapUiSizeCompact" enableBasicSearch="true"
+    entityType="C_PurchaseRequisition_WLType" filterBarExpanded="false" filterChange="" id="idSmartFilterPRList" initialise="onInitDone"
+    persistencyKey="F1643.controller.PurReqList" reset="ResetFields" search="onSearchPRList" cancel="cancelFilter">
+    <smartfilterbar:controlConfiguration>
+     <smartfilterbar:ControlConfiguration controlType="auto" groupId="_BASIC" hasValueHelpDialog="true" index="1" key="PurchaseRequisition"
+      label="{i18n>PurReq}" preventInitialDataFetchInValueHelpDialog="false" visible="true"></smartfilterbar:ControlConfiguration>
+    </smartfilterbar:controlConfiguration>
+    <smartfilterbar:controlConfiguration>
+     <smartfilterbar:ControlConfiguration controlType="auto" groupId="_BASIC" hasValueHelpDialog="true" index="2" key="Supplier"
+      label="{i18n>Supplier}" preventInitialDataFetchInValueHelpDialog="false" visible="true"></smartfilterbar:ControlConfiguration>
+    </smartfilterbar:controlConfiguration>
+    <smartfilterbar:controlConfiguration>
+     <smartfilterbar:ControlConfiguration controlType="auto" groupId="_BASIC" hasValueHelpDialog="true" index="3" key="Material"
+      label="{i18n>Material}" preventInitialDataFetchInValueHelpDialog="false" visible="true"></smartfilterbar:ControlConfiguration>
+    </smartfilterbar:controlConfiguration>
+    <smartfilterbar:controlConfiguration>
+     <smartfilterbar:ControlConfiguration controlType="dropDownList" groupId="_BASIC" hasValueHelpDialog="true" index="4"
+      key="PurReqnLifeCycleStatus" label="{i18n>Status}" preventInitialDataFetchInValueHelpDialog="false" visible="true"></smartfilterbar:ControlConfiguration>
+    </smartfilterbar:controlConfiguration>
+    <smartfilterbar:controlConfiguration> 
+     <smartfilterbar:ControlConfiguration groupId="_BASIC" hasValueHelpDialog="true" index="5" key="CreationDate" label="{i18n>timeFrame}"
+      preventInitialDataFetchInValueHelpDialog="false" visible="true">
+      <smartfilterbar:customControl>
+       <DateRangeSelection id="timeRangeFilter" change="checkDateNow"/>
+      </smartfilterbar:customControl>
+     </smartfilterbar:ControlConfiguration>
+    </smartfilterbar:controlConfiguration>
+   </smartfilterbar:SmartFilterBar>
+   <smartTable:SmartTable class="sapFioriListReportSmartTable" enableAutoBinding="true" enableCustomFilter="true"
+    entitySet="C_PurchaseRequisition_WL" header="{i18n>PurReqHeader}" id="idSmartTablePRList" ignoredFields="PurReqnLifeCycleStatus,Cnt,Id"
+    persistencyKey="RequisitionsTable.controller.PurReqList" showRowCount="true" smartFilterId="" useExportToExcel="true" beforeExport="onBeforeExport"
+    useTablePersonalisation="false" ignoreFromPersonalisation ="NumberOfItems" requestAtLeastFields="IsExtPurgScenario">
+    <smartTable:customToolbar width="20%">
+     <Toolbar class="sapUiMediumMarginBegin sapUiMediumMarginEnd" design="Transparent" height="60px">
+      <ToolbarSpacer/>
+      <Link align="Right" class="sapUiTinyMarginBegin sapUiTinyMarginEnd" enabled="false" id="deleteReqLinkId" press="onPressDeleteRequisition"
+       text="{i18n>overviewDelete}"/>
+      <!--<Link enabled="false" id="EditReqLinkId" press="fnNavigateEditItemList" text="{i18n>edit}"/>-->
+      <Link enabled="false" id="ConfirmGRLinkId" press="fnNavigateConfirmGR" text="{i18n>confirmGR}"/>
+      <Link enabled="false" id="ReturnGRLinkId" press="fnNavigateReturnGR" text="{i18n>returnGR}"/>
+     </Toolbar>
+    </smartTable:customToolbar>
+    <Table class="sapUiMediumMarginBegin sapUiMediumMarginEnd" enableBusyIndicator="true" growing="true" growingScrollToLoad="true"
+     id="idRequisitionItemsTable" mode="SingleSelectLeft" selectionChange="onPressRow" visible="true" width="auto">
+     <columns>
+      <Column demandPopin="true" id="idRequisitionColumn" minScreenWidth="Phone">
+       <Text text="{i18n>PurReq}"/>
+       <customData>
+        <core:CustomData key="p13nData"
+         value='\{"columnKey":"requisitionNumberColKey", "leadingProperty":"PurchaseRequisition", "additionalProperty":"PurReqnDescription", "sortProperty":"PurchaseRequisition", "filterProperty":"PurchaseRequisition" }'/>
+       </customData>
+      </Column>
+      <Column demandPopin="true" hAlign="End" id="idItemsCountColumn" minScreenWidth="Tablet">
+       <Text class="sapUiLargeMarginEnd" text="{i18n>numOfItems}"/>
+       <customData>
+        <core:CustomData key="p13nData"
+         value='\{"columnKey":"itemsCountColKey", "leadingProperty":"NumberOfItems", "sortProperty":"NumberOfItems", "filterProperty":"NumberOfItems" }'/>
+       </customData>
+      </Column>
+      <Column demandPopin="true" id="idStatusColumn" minScreenWidth="Tablet">
+       <Text text="{i18n>Status}"/>
+       <customData>
+        <core:CustomData key="p13nData"
+         value='\{"columnKey":"requisitionStatusColKey", "leadingProperty":"PurReqnLifeCycleStatus", "additionalProperty":"PurReqnLifeCycleStatusName", "sortProperty":"PurReqnLifeCycleStatus", "filterProperty":"PurReqnLifeCycleStatus" }'/>
+       </customData>
+      </Column>
+      <Column demandPopin="true" id="idCreationDateColumn" minScreenWidth="Tablet">
+       <Text text="{i18n>createdOn}"/>
+       <customData>
+        <core:CustomData key="p13nData"
+         value='\{"columnKey":"requisitionCreationDateColKey", "leadingProperty":"CreationDate", "sortProperty":"CreationDate", "filterProperty":"CreationDate", "type":"date" }'/>
+       </customData>
+      </Column>
+      <Column demandPopin="true" hAlign="End" id="idTotalValueColumn" minScreenWidth="Tablet">
+       <Text class="sapUiMediumMarginEnd" text="{i18n>totalValue}"/>
+       <customData>
+        <core:CustomData key="p13nData"
+         value='\{"columnKey":"totalValueColKey", "leadingProperty":"TotalNetAmount", "additionalProperty":"Currency", "sortProperty":"TotalNetAmount", "filterProperty":"TotalNetAmount" }'/>
+       </customData>
+      </Column>
+     </columns>
+     <items>
+      <ColumnListItem press="fnNavigateItemList" type="Navigation">
+       <cells>
+        <!--<VerticalLayout xmlns="sap.ui.layout" class="sapUiSmallMarginTop sapUiSmallMarginBottom">-->
+        <!--        <Link press="handlePRFactSheetNavigation" text="{PurchaseRequisition}" xmlns="sap.m"/>-->
+        <!--        <Label text="{PurReqnDescription}" xmlns="sap.m"/>-->
+        <!--</VerticalLayout>-->
+        <ObjectIdentifier class="sapUiSmallMarginTop sapUiSmallMarginBottom" text="{PurReqnDescription}" title="{PurchaseRequisition}"
+         titleActive="true" titlePress="handlePRFactSheetNavigation"/>
+        <Link class="sapUiLargeMarginEnd sapUiSmallMarginTop sapUiSmallMarginBottom"
+        text="{path: 'NumberOfItems', formatter:'.formatter.formatNumberOfItems'} " press="handleStatusPress"/>
+        <Text class="sapUiSmallMarginTop sapUiSmallMarginBottom" text="{PurReqnLifeCycleStatusName}"/>
+        <Text class="sapUiSmallMarginTop sapUiSmallMarginBottom" text="{parts:[{path:'CreationDate'}],formatter:'.formatter.formatCreatedDate'}"/>
+        <ObjectNumber class="sapUiMediumMarginEnd sapUiSmallMarginTop sapUiSmallMarginBottom"
+         number="{parts:[{path:'TotalNetAmount'},{path:'Currency'}],formatter:'.formatter.formatTotalValue'}" unit="{Currency}"/>
+
+       </cells>
+      </ColumnListItem>
+     </items>
+    </Table>
+   </smartTable:SmartTable>
+  </content>
+ </Page>
+</View>

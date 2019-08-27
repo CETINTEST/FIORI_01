@@ -1,0 +1,61 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:l="sap.ui.layout"
+ xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:smartField="sap.ui.comp.smartfield" xmlns="sap.m">
+ <Popover class="" id="popover" placement="Bottom" title="{i18n>miniCartTitle}" afterOpen="afterMiniCartOpen">
+  <footer>
+   <Toolbar>
+    <ToolbarSpacer/>
+    <Button enabled="false" press="handleOrderCartPress" text="{i18n>orderCart}" type="Emphasized"/>
+    <Button enabled="false" press="handleViewCartPress" text="{i18n>viewCart}"/>
+   </Toolbar>
+  </footer>
+  <VBox>
+   <List delete="deleteItem" id="minicartList" mode="Delete" updateFinished="listUpdated" width="100%">
+    <CustomListItem class="">
+     <HBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop">
+      <Image alt="{i18n>catalogImage}" class="" densityAware="false" height="4rem"
+       src="{path: 'OpnCtlgMainImageURL', formatter: '.formatter.imgnotfound'}" width="4rem"></Image>
+      <FlexBox alignItems="Start" class="sapUiSmallMarginBegin" justifyContent="Start">
+       <items>
+        <VBox class="sapUiSmallMarginBottom">
+         <Text maxLines="1" text="{PurchaseRequisitionItemText}" tooltip="{PurchaseRequisitionItemText}" width="15rem"/>
+         <HBox>
+          <Text text="{path: 'i18n>miniSupplier', formatter : '.formatter.totalText'}"/>
+          <Text class="sapUiTinyMarginBegin" text="{parts:[{path:'FixedSupplier'},{path:'Supplier'},{path:'ExtFixedSupplierForPurg'},{path:'ExtDesiredSupplierForPurg'},{path:'ExtInfoRecordForPurg'},{path:'ExtContractForPurg'}],formatter:'.formatter.Supplier' }"/>
+         </HBox>
+         <HBox visible="{path: 'ProductType', formatter: '.formatter.formartOnMaterialVisibility' }">
+          <Text class=""
+           text="{path: 'i18n>overviewDelDate', formatter : '.formatter.totalText'} {path: 'DeliveryDate', type: 'sap.ui.model.type.Date', formatOptions: { style: 'medium', UTC: true }}"/>
+         </HBox>
+         <HBox visible="{path: 'ProductType', formatter: '.formatter.formartOnServiceVisibility' }">
+          <Text text="{path: 'i18n>validityPeriod', formatter : '.formatter.totalText'}"/>
+          <Text class="sapUiTinyMarginBegin"
+           text="{parts:[{path:'PerformancePeriodStartDate'},{path:'PerformancePeriodEndDate'}],formatter:'.formatter.miniCartDateRangeFormartting'}"/>
+         </HBox>
+         <HBox>
+          <Text text="{path: 'i18n>overviewQuantity', formatter : '.formatter.totalText'}"/>
+          <!--<Text class="sapUiTinyMarginBegin" text="{parts : [{path:'RequestedQuantity'}, {path:'BaseUnit'}], formatter: '.formatter.concat'}"/>-->
+          <smartField:SmartField contextEditable="false" value="{path:'RequestedQuantity'}"/>
+         </HBox>
+         <ObjectNumber emphasized="true"
+          number="{parts:[{path:'TotalNetAmount'},{path:'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+          textAlign="Right" unit="{Currency}"/>
+        </VBox>
+       </items>
+      </FlexBox>
+     </HBox>
+    </CustomListItem>
+   </List>
+   <FlexBox alignItems="Start" class="sapUiSmallMarginTopBottom" justifyContent="End" width="21rem">
+    <Label class="sapUiTinyMarginEnd" design="Bold" text="{path: 'i18n>totalMiniCart',formatter: '.formatter.totalText'}"/>
+    <ObjectNumber emphasized="true" id="minicartTotal"
+     number="{parts:[{path:'TotalNetAmount'},{path:'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+     unit="{Currency}"/>
+   </FlexBox>
+  </VBox>
+ </Popover>
+</core:FragmentDefinition>

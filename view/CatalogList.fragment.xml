@@ -1,0 +1,52 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<!-- List catalog -->
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:l="sap.ui.layout"
+ xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:smartTable="sap.ui.comp.smarttable" xmlns="sap.m">
+ <VBox class="sapUiMediumMarginBeginEnd sapUiMediumMarginTop">
+  <smartTable:SmartTable >
+   <smartTable:customToolbar>
+    <Toolbar class="" height="3.5rem">
+     <Label design="Bold" level="H2" text="{i18n>launchCatalogs}"/>
+     <ToolbarSpacer/>
+     <Button alt="{i18n]catalogImage}" enabled="false" icon="sap-icon://list" press="showCatalogList" type="Emphasized"/>
+     <Button alt="{i18n]catalogImage}" icon="sap-icon://grid" press="showGridCatalog" tooltip="{i18n>gridCatalog}" type="Transparent"/>
+    </Toolbar>
+   </smartTable:customToolbar>
+   <Table backgroundDesign="" class="" inset="false" items="{path: '/UserCatalogSet'}">
+    <columns class="">
+     <Column class="" hAlign="Left" width="6rem">
+      <header></header>
+     </Column>
+     <Column demandPopin="true" hAlign="Left" minScreenWidth="Tablet" width="7rem">
+      <header></header>
+     </Column>
+     <Column demandPopin="true" hAlign="Left" minScreenWidth="Tablet">
+      <header></header>
+     </Column>
+    </columns>
+    <ColumnListItem id="" press="onCatalogNavClick" type="Active" vAlign="Middle">
+     <cells class="">
+      <VBox class="sapUiSmallMarginTopBottom">
+       <Image alt="{i18n>catalogImage}" class="" densityAware="true" height="6rem" src="{path: 'IconPath', formatter: '.formatter.imgnotfound'}"
+        width="6rem"/>
+      </VBox>
+     </cells>
+     <cells >
+      <VBox class="sapUiSmallMarginTopBottom">
+       <Link emphasized="true" press="onPressText" text="{ServiceId}"/>
+      </VBox>
+     </cells>
+     <cells >
+      <VBox class="sapUiSmallMarginTopBottom">
+       <Text text="{ServiceDescription}"/>
+      </VBox>
+     </cells>
+    </ColumnListItem>
+   </Table>
+  </smartTable:SmartTable>
+ </VBox>
+</core:FragmentDefinition>

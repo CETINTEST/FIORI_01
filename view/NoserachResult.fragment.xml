@@ -1,0 +1,23 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<!-- No Search Result -->
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:l="sap.ui.layout"
+ xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns="sap.m">
+ <FlexBox justifyContent='Center'>
+  <l:FixFlex class="">
+   <l:fixContent>
+    <HBox>
+     <Title class="sapUiMediumMarginTopBottom" design="bold" text="{i18n>Nomatching}" titleStyle="H2"/>
+    </HBox>
+    <HBox>
+     <Label text="{i18n>NoResultsText1}"/>
+     <Label class="sapUiTinyMarginBeginEnd" text="{i18n>NoResultsText2}"/>
+     <Link press="goToFreetext" text="{i18n>appTitleCreate}"/>
+    </HBox>
+   </l:fixContent>
+  </l:FixFlex>
+ </FlexBox>
+</core:FragmentDefinition>

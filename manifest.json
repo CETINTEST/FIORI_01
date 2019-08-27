@@ -1,0 +1,257 @@
+{
+    "_version": "1.6.0",
+    "sap.app": {
+        "_version": "1.2.0",
+        "id": "ui.s2p.mm.requisition.maintain.s1",
+        "type": "application",
+        "resources": "resources.json",
+        "i18n": "i18n/i18n.properties",
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "applicationVersion": {
+            "version": "5.0.34"
+        },
+        "ach": "MM-PUR-REQ",
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/MMPUR_REQ_SSP_MAINTAIN_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "annotations": [
+                        "localAnnotations"
+                    ],
+                    "localUri": "test/service/metadata.xml"
+                }
+            },
+            "localAnnotations": {
+                "uri": "annotations/annotations.xml",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "annotations/annotations.xml"
+                }
+            }
+        },
+        "sourceTemplate": {
+            "id": "sap.ui.ui5-template-plugin.1worklist",
+            "version": "1.0.5"
+        }
+    },
+    "sap.ui": {
+        "_version": "1.1.0",
+        "technology": "UI5",
+        "icons": {
+            "icon": "sap-icon://task",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        },
+        "supportedThemes": [
+            "sap_hcb",
+            "sap_bluecrystal"
+        ]
+    },
+    "sap.ui5": {
+        "_version": "1.1.0",
+        "rootView": "ui.s2p.mm.requisition.maintain.s1.view.App",
+        "handleValidation": true,
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/Purchase.css"
+                }
+            ]
+        },
+        "config": {
+            "sapFiori2Adaptation": true,
+            "fullWidth": true
+        },
+        "dependencies": {
+            "minUI5Version": "1.48.4",
+            "libs": {
+                "sap.ui.core": {},
+                "sap.m": {
+                    "minVersion": "1.48.4"
+                },
+                "sap.se.mi.plm.lib.attachmentservice": {
+                    "minVersion": "1.30.0"
+                },
+                "sap.ui.s2p.mm.lib.reuse.accounting": {
+                    "minVersion": "10.5.0"
+                },
+                "sap.me": {
+                    "minVersion": "1.48.4"
+                },
+                "sap.ui.layout": {},
+                "sap.ui.comp": {},
+                "sap.ca.ui": {},
+                "sap.ushell": {},
+                "sap.suite.ui.commons": {},
+                "sap.s4.cfnd.lib.businessprocessflow": {},
+                "sap.ui.unified": {}
+            },
+            "components": {
+                "sap.se.mi.plm.lib.attachmentservice.attachment": {
+                    "minVersion": "1.30.0"
+                },
+                "sap.ui.s2p.mm.lib.reuse.accounting.component": {
+                    "minVersion": "10.5.0"
+                }
+            }
+        },
+        "componentUsages": {
+            "attachmentReuseComponent": {
+                "name": "sap.se.mi.plm.lib.attachmentservice.attachment",
+                "settings": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "ui.s2p.mm.requisition.maintain.s1.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "settings": {
+                    "metadataUrlParams": {
+                        "sap-documentation": "heading,quickinfo"
+                    }
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            }
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "viewPath": "ui.s2p.mm.requisition.maintain.s1.view",
+                "controlId": "app",
+                "controlAggregation": "pages",
+                "bypassed": {
+                    "target": "notFound"
+                }
+            },
+            "routes": [
+                {
+                    "pattern": "",
+                    "name": "NotFound",
+                    "target": "NotFound"
+                },
+                {
+                    "pattern": "PurReqList",
+                    "name": "PurReqList",
+                    "target": "PurReqList"
+                },
+                {
+                    "pattern": "Search",
+                    "name": "Search",
+                    "target": "Search"
+                },
+                {
+                    "pattern": "SearchResults/{Draftkey}/{PurchaseRequisition}",
+                    "name": "SearchResults",
+                    "target": "SearchResults"
+                },
+                {
+                    "pattern": "Freetext/{DraftKey}/{PurchaseRequisition}/{SearchValue}",
+                    "name": "Freetext",
+                    "target": "Freetext"
+                },
+                {
+                    "pattern": "CartOverview/{DraftKey}/{PurchaseRequisition}",
+                    "name": "CartOverview",
+                    "target": "CartOverview"
+                },
+                {
+                    "pattern": "ItemDetails/{DraftKey}/{PurchaseRequisition}/{DraftUUID}/{items}/{OpnCtlgItemID}/{PurchaseRequisitionItem}/{Editable}",
+                    "name": "ItemDetails",
+                    "target": "ItemDetails"
+                },
+                {
+                    "pattern": "ProductDetails/{DraftKey}/{PurchaseRequisition}/{view}/{OpnCtlgItemID}/{Language}/{free}",
+                    "name": "ProductDetails",
+                    "target": "ProductDetails"
+                },
+                {
+                    "pattern": "Account_Asisgnment_Detail/{formBindingPath}",
+                    "name": "Account_Asisgnment_Detail",
+                    "target": "Account_Asisgnment_Detail"
+                }
+            ],
+            "targets": {
+                "NotFound": {
+                    "viewName": "NotFound",
+                    "viewId": "NotFound",
+                    "viewLevel": 1
+                },
+                "PurReqList": {
+                    "viewName": "PurReqList",
+                    "viewId": "PurReqList",
+                    "viewLevel": 1
+                },
+                "Search": {
+                    "viewName": "Search",
+                    "viewId": "Search",
+                    "viewLevel": 1
+                },
+                "SearchResults": {
+                    "viewName": "SearchResults",
+                    "viewId": "SearchResults",
+                    "viewLevel": 1
+                },
+                "ProductDetails": {
+                    "viewName": "ProductDetails",
+                    "viewId": "ProductDetails",
+                    "viewLevel": 2
+                },
+                "Freetext": {
+                    "viewName": "Freetext",
+                    "viewId": "Freetext",
+                    "viewLevel": 2
+                },
+                "CartOverview": {
+                    "viewName": "CartOverview",
+                    "viewId": "CartOverview",
+                    "viewLevel": 2
+                },
+                "ItemDetails": {
+                    "viewName": "ItemDetails",
+                    "viewId": "ItemDetails",
+                    "viewLevel": 2
+                },
+                "Account_Asisgnment_Detail": {
+                    "viewName": "Account_Asisgnment_Detail",
+                    "viewId": "Account_Asisgnment_Detail",
+                    "viewLevel": 2
+                }
+            }
+        }
+    },
+    "sap.platform.abap": {
+        "_version": "1.1.0",
+        "uri": "/sap/bc/ui5_ui5/sap/mm_req_maints1"
+    },
+    "sap.fiori": {
+        "_version": "1.1.0",
+        "registrationIds": [
+            "F1643"
+        ],
+        "archeType": "transactional"
+    }
+}

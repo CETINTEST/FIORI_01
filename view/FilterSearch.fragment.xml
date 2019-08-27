@@ -1,0 +1,14 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<!-- fragment search -->
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns="sap.m">
+ <List headerText="{i18n>Filter}" includeItemInSelection="true"
+  items="{ path: '/results', sorter: { path: 'PropertyCategory', descending: false, group: true }, groupHeaderFactory: '.getGroupHeader' }"
+  mode="MultiSelect" selectionChange="onSelectionFilter">
+  <StandardListItem counter="{path: 'TotalHits', formatter: '.formatter.convertInt' }" iconInset="true" title="{PropertyValue}"/>
+  <layoutData><l:SplitterLayoutData size="400px"/></layoutData>
+ </List>
+</core:FragmentDefinition>

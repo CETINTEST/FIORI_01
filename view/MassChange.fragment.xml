@@ -1,0 +1,142 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:semantic="sap.m.semantic"
+ xmlns:smartForm="sap.ui.comp.smartform" xmlns="sap.m">
+ <Dialog cancel="handleClose" contentHeight="420px" contentWidth="300px" resizable="true" id="massChangeDialog" showHeader="false">
+  <content>
+   <NavContainer id="Dialog_Nc_ApplyChange">
+    <Page id="p1" showHeader="true" title="{i18n>selectChanges}">
+     <List id="selectedItemsSections" selectionChange="updateMassItemCount" mode="MultiSelect" includeItemInSelection="true">
+      <infoToolbar>
+       <Toolbar visible="false" id="selSectionsToolbar">
+        <Label id="selChangesPage1"/>
+       </Toolbar>
+      </infoToolbar>
+      <items>
+       <CustomListItem id="generalDataSection">
+        <FlexBox alignItems="Start" class="sapUiSmallMarginBegin sapUiSmallMarginTop" justifyContent="Start">
+         <items>
+          <VBox class="sapUiSmallMarginBottom">
+           <Title text="{i18n>generalDataMassChange}"/>
+           <HBox visible="{path: '/ProductType', formatter: '.formatter.formartOnMaterialVisibility' }">
+            <Text text="{path: 'i18n>overviewDelDate'}"/>
+            <Text fieldGroupIds="generalData"
+             text="{path: '/DeliveryDate',type: 'sap.ui.model.type.Date',formatOptions:{style: 'short'},formatter : '.formatter.totalTextApplyChange'}"/>
+           </HBox>
+           <HBox visible="{path: '/ProductType', formatter: '.formatter.formartOnServiceVisibility' }">
+            <Text text="{path: 'i18n>servicePerformer'}"/>
+            <Text fieldGroupIds="generalData" text="{path: '/ServicePerformer', formatter : '.formatter.totalTextApplyChange' }"/>
+           </HBox>
+           <HBox visible="{path: '/ProductType', formatter: '.formatter.formartOnServiceVisibility' }">
+            <Text text="{path: 'i18n>validityPeriod', formatter : '.formatter.totalText'}"/>
+            <Text fieldGroupIds="generalData"
+             text="{parts:[{path:'/PerformancePeriodStartDate'},{path:'/PerformancePeriodEndDate'}],formatter:'.formatter.miniCartDateRangeFormartting'}"/>
+           </HBox>
+           <HBox>
+            <Text text="{path: 'i18n>Plant'}"/>
+            <Text fieldGroupIds="generalData" text="{path: '/Plant', formatter : '.formatter.totalTextApplyChange'}"/>
+           </HBox>
+           <HBox>
+            <Text text="{path: 'i18n>purchasinGroup'}"/>
+            <Text fieldGroupIds="generalData" text="{path: '/PurchasingGroup', formatter : '.formatter.totalTextApplyChange'}"/>
+           </HBox>
+           <HBox>
+            <Text text="{path: 'i18n>purchasingOrg'}"/>
+            <Text fieldGroupIds="generalData" text="{path: '/PurchasingOrganization', formatter : '.formatter.totalTextApplyChange'}"/>
+           </HBox>
+           <HBox>
+            <Text text="{path: 'i18n>companyCode'}"/>
+            <Text fieldGroupIds="generalData" text="{path: '/CompanyCode', formatter: '.formatter.companycode'}"/>
+           </HBox>
+          </VBox>
+         </items>
+        </FlexBox>
+       </CustomListItem>
+       <CustomListItem id="deliveryAddressListItem">
+        <FlexBox alignItems="Start" class="sapUiSmallMarginBegin sapUiSmallMarginTop" justifyContent="Start">
+         <items>
+          <VBox id="Applychangedeliveryaddress" class="sapUiSmallMarginBottom">
+           <Title design="Bold" text="{path: 'i18n>overviewDeliveryAddress', formatter : '.formatter.totalText'}"/>
+           <HBox>
+            <Text fieldGroupIds="delvAddress" text="{parts : [{path:'/salutationName'},{path:'/FullName'}], formatter:'.formatter.AddressFormatter'}"/>
+           </HBox>
+           <HBox>
+            <Text fieldGroupIds="delvAddress"
+             text="{parts : [{path:'/AddressStreetName'},{path:'/AddressHouseNumber'}], formatter:'.formatter.AddressFormatter'}"/>
+           </HBox>
+           <HBox>
+            <Text fieldGroupIds="delvAddress"
+             text="{parts : [{path:'/AddressPostalCode'},{path:'/AddressCityName'},{path:'/countryName'}], formatter:'.formatter.AddressFormatter'}"/>
+           </HBox>
+           <HBox>
+            <Text fieldGroupIds="delvAddress" text="{/FaxNumber}" visible="{path:'/FaxNumber', formatter: '.formatter.fieldVisiblity'}"/>
+           </HBox>
+           <HBox>
+            <Text fieldGroupIds="delvAddress" text="{/regionText}" visible="{path:'/regionText', formatter: '.formatter.fieldVisiblity'}"/>
+           </HBox>
+           <HBox>
+            <Text fieldGroupIds="delvAddress" text="{/PhoneNumber1}" visible="{path:'/PhoneNumber1', formatter: '.formatter.fieldVisiblity'}"/>
+           </HBox>
+           <HBox>
+            <Text fieldGroupIds="delvAddress" text="{/EmailAddress}" visible="{path:'/EmailAddress', formatter: '.formatter.fieldVisiblity'}"/>
+           </HBox>
+          </VBox>
+         </items>
+        </FlexBox>
+       </CustomListItem>
+       <CustomListItem id="sourceofSupply">
+        <FlexBox alignItems="Start" class="sapUiSmallMarginBegin sapUiSmallMarginTop" justifyContent="Start">
+         <items>
+          <VBox id="sourceofSupplyApplychange" class="sapUiSmallMarginBottom">
+           <Title design="Bold" text="{path: 'i18n>sourceOfSupply', formatter : '.formatter.totalText'}"/>
+           <HBox>
+            <Text text="{path: 'i18n>SupplierName'}"/>
+            <Text text="{parts : [{path:'/Supplier'},{path:'/FixedSupplier'}], formatter:'.formatter.supplierType'}"/>
+           </HBox>
+          </VBox>
+         </items>
+        </FlexBox>
+       </CustomListItem>
+      </items>
+     </List>
+     <footer>
+      <Toolbar>
+       <ToolbarSpacer/>
+       <Button enabled="false" press="onSelectItemsApplyChange" text="{i18n>selectItems}" id="onSelectBtnPG1" width="50%"/>
+       <Button press="onCancelChanges" text="{i18n>cancel}" width="50%"/>
+      </Toolbar>
+     </footer>
+    </Page>
+    <Page id="p2" title="{i18n>selectedItems}" showNavButton="true" navButtonPress="goBacktoSectionsPage">
+     <Panel class="sapUiNoContentPadding" id="idItemStatus"></Panel>
+     <subHeader>
+      <Toolbar>
+       <SearchField id="searchinput" liveChange="onSearchMassChange" width="100%"/>
+      </Toolbar>
+     </subHeader>
+     <List id="otherItemsList" selectionChange="updateMassItemCount" mode="MultiSelect" items="{ path: 'b>/items' }" includeItemInSelection="true">
+      <infoToolbar>
+       <Toolbar visible="false" id="selItemsToolbar">
+        <Label id="selChangesPage2"/>
+       </Toolbar>
+      </infoToolbar>
+      <items>
+       <StandardListItem title="{b>PurchaseRequisitionItemText}" description="{b>Material}"
+        icon="{path: 'b>OpnCtlgMainImageURL', formatter: '.formatter.imgnotfound'}" iconDensityAware="false" width="3rem"/>
+      </items>
+     </List>
+     <footer>
+      <Toolbar>
+       <ToolbarSpacer/>
+       <Button enabled="false" press="onSaveChanges" text="{i18n>ok}" id="onSelectBtnPG2" width="50%"/>
+       <Button press="onCancelChanges" text="{i18n>cancel}" width="50%"/>
+      </Toolbar>
+     </footer>
+    </Page>
+   </NavContainer>
+  </content>
+ </Dialog>
+</core:FragmentDefinition>

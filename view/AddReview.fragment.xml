@@ -1,0 +1,22 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+ <Dialog close="handleClose" confirm="handleClose" endButton="submitReview" id="reviewDialog" title="{i18n>AddReview}">
+  <content>
+   <VBox>
+    <RatingIndicator class="sapUiSmallMargin" iconSize="2rem" id="idProductRating" maxValue="5"/>
+    <TextArea class="sapUiSmallMargin" cols="50" editable="true" enabled="true" id="idReviewText" placeholder="{i18n>reviewPlaceholder}"
+     rows="5"></TextArea>
+   </VBox>
+  </content>
+  <beginButton>
+   <Button id="submitReview" press="submitReview" text="{i18n>ok}"/>
+  </beginButton>
+  <endButton>
+   <Button id="closeButton" press="handleClose" text="{i18n>cancel}"/>
+  </endButton>
+ </Dialog>
+</core:FragmentDefinition>

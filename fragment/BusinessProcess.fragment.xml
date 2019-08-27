@@ -1,0 +1,20 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition xmlns:caui="sap.ca.ui" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
+ xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+ <Dialog afterClose="handleClose" contentHeight="10rem" initialVisiblePanelType="sort" ok="handleClose" reset="handleReset" showReset="true"
+  title="{i18n>itemStatus}">
+  <content>
+
+   <Panel class="sapUiNoContentPadding" id="idItemStatus">
+       <core:ComponentContainer id="BusProcessCompContainerCO" name="sap.s4.cfnd.lib.businessprocessflow.component.freestyle" propagateModel="true"
+        settings="\{&quot;layoutId&quot;:&quot;\{UIModel&gt;/key\}&quot;, &quot;docId&quot;:&quot;\{UIModel&gt;/key2\}&quot;, &quot;Item&quot;:&quot;\{UIModel&gt;/Item\}&quot;, &quot;KeyName&quot;:&quot;\{UIModel&gt;/KeyName\}&quot;, &quot;ItemKeyName&quot;:&quot;\{UIModel&gt;/ItemKeyName\}&quot;, &quot;FiscalYear&quot;:&quot;\{UIModel&gt;/FiscalYear\}&quot;, &quot;CompanyCode&quot;:&quot;\{UIModel&gt;/CompanyCode\}&quot;, &quot;FiscalYearKey&quot;:&quot;\{UIModel&gt;/FiscalYearKey\}&quot;, &quot;CompanyCodeKey&quot;:&quot;\{UIModel&gt;/CompanyCodeKey\}&quot; \}"/>
+      </Panel>
+
+ </content>
+
+ </Dialog>
+</core:FragmentDefinition>

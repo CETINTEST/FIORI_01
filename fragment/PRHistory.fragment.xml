@@ -1,0 +1,31 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:l="sap.ui.layout"
+ xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:smartField="sap.ui.comp.smartfield" xmlns="sap.m"
+ xmlns:time="sap.suite.ui.commons">
+ <Popover placement="Right" showHeader="false" contentHeight="80%" contentWidth="80%">
+  <NavContainer id="navCon">
+   <Page id="p1" title="{i18n>purchasedItems}">
+    <subHeader>
+     <Toolbar>
+      <SearchField liveChange="onItemSearch" width="100%"/>
+     </Toolbar>
+    </subHeader>
+    <List id="itemsList" items="{pf2>/results}">
+     <items>
+      <StandardListItem type="Navigation" title="{pf2>PurchaseRequisitionItemText}" description="{pf2>PurchaseRequisitionItem}" press="handleNav"/>
+     </items> 
+    </List>
+   </Page>
+   <Page id="p2" title="{i18n>itemStatus}" showNavButton="true" navButtonPress="goBack">
+       <Panel class="sapUiNoContentPadding" id="idItemStatus">
+       <core:ComponentContainer id="BusProcessCompContainerMyPR" name="sap.s4.cfnd.lib.businessprocessflow.component.freestyle" propagateModel="true"
+        settings="\{&quot;layoutId&quot;:&quot;\{UIModel&gt;/key\}&quot;, &quot;docId&quot;:&quot;\{UIModel&gt;/key2\}&quot;, &quot;Item&quot;:&quot;\{UIModel&gt;/Item\}&quot;, &quot;KeyName&quot;:&quot;\{UIModel&gt;/KeyName\}&quot;, &quot;ItemKeyName&quot;:&quot;\{UIModel&gt;/ItemKeyName\}&quot;, &quot;FiscalYear&quot;:&quot;\{UIModel&gt;/FiscalYear\}&quot;, &quot;CompanyCode&quot;:&quot;\{UIModel&gt;/CompanyCode\}&quot;, &quot;FiscalYearKey&quot;:&quot;\{UIModel&gt;/FiscalYearKey\}&quot;, &quot;CompanyCodeKey&quot;:&quot;\{UIModel&gt;/CompanyCodeKey\}&quot;, &quot;serviceField&quot;:&quot;\{UIModel&gt;/serviceField\}&quot; \}"/>
+      </Panel>
+    </Page>
+  </NavContainer>
+ </Popover>
+</core:FragmentDefinition>

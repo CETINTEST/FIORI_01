@@ -1,0 +1,16 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+ <Popover showHeader = "false"  placement="Top" >
+  <footer>
+   <Toolbar>
+    <ToolbarSpacer/>
+    <Button icon = "sap-icon://email" id="email" text ="{i18n>sendEmail}" press="sendEmail"/>
+   </Toolbar>
+  </footer>
+  <!--<Image src="{ProductPicUrl}" width="15em" densityAware="false"/>-->
+ </Popover>
+</core:FragmentDefinition>

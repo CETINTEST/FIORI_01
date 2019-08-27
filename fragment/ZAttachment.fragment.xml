@@ -1,0 +1,37 @@
+<core:FragmentDefinition xmlns:caui="sap.ca.ui" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ui.s2p.mm.requisition.maintain.s1.controller.ZAttachment">
+	<Table noDataText="{i18n>AttNoDataText}" id="tbl_attachment" items="{Attachment>/results}" mode="Delete" delete="onAttachDelete">
+		<headerToolbar>
+			<Toolbar visible="{viewModel>/editable}">
+				<ToolbarSpacer/>
+				<Button icon="sap-icon://add-document" press="onNewAttachment" tooltip="{i18n>NewAttachment}"/>
+			</Toolbar>
+		</headerToolbar>
+		<items>
+			<ColumnListItem type="Navigation" press="onAttachPress">
+				<cells>
+					<ObjectIdentifier title="{Attachment>AttachName}"/>
+					<Text text="{Attachment>AttDescription}"/>
+					<CheckBox selected="{Attachment>AttInternal}" editable="false"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+		<columns>
+			<Column>
+				<header>
+					<Label text="{i18n>AttFileName}"/>
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Label text="{i18n>AttFileDescr}"/>
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Label text="{i18n>AttFileInt}"/>
+				</header>
+			</Column>
+		</columns>
+	</Table>
+</core:FragmentDefinition>

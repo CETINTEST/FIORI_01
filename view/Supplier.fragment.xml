@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:smartField="sap.ui.comp.smartfield" xmlns="sap.m">
+ <Dialog cancel="handleClose" contentHeight="10rem" initialVisiblePanelType="sort" ok="handleClose" reset="handleReset" showReset="true"
+  title="{i18n>supplierHeading}" beforeOpen="beforeDialogOpen" >
+  <content>
+   <f:SimpleForm id="simpleForm">
+    <f:content>
+     <HBox>
+      <smartField:SmartLabel class="sapUiTinyMarginTop" text="{i18n>miniSupplier}"/>
+      <smartField:SmartField id="supplier" showValueHelp="true" value="{FixedSupplier}" width="14rem"/>
+     </HBox>
+    </f:content>
+   </f:SimpleForm>
+   <f:SimpleForm>
+    <f:content>
+     <VBox>
+      <RadioButtonGroup>
+       <buttons>
+        <RadioButton id="preferred" selected="true" text="{i18n>Preferred}" tooltip = "{i18n>Preferred}"/>
+        <RadioButton id="fixed" text="{i18n>Fixed}" tooltip = "{i18n>Fixed}"/>
+       </buttons>
+      </RadioButtonGroup>
+     </VBox>
+    </f:content>
+   </f:SimpleForm>
+  </content>
+  <beginButton>
+   <Button  id="btnaddSupplier" press="onSupplierChange" text="{i18n>Add}"/>
+  </beginButton>
+  <endButton ><Button press="onCancelSupplier" text="{i18n>cancel}"/></endButton>
+ </Dialog>
+</core:FragmentDefinition>

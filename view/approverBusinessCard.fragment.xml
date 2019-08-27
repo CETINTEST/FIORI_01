@@ -1,0 +1,24 @@
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:core="sap.ui.core"
+ xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns="sap.m">
+ <Popover contentWidth="320px" placement="Auto" showHeader="true" title="{i18n>APRVR}" verticalScrolling="false">
+  <content>
+   <StandardListItem icon="sap-icon://person-placeholder" iconDensityAware="false" iconInset="false" title="{/Fullname}"/>
+   <ObjectHeader title="{i18n>CNDT}">
+    <attributes>
+     <ObjectAttribute id="businessMobile" text="{i18n>Mobile}"/>
+     <ObjectAttribute active="true" id="businessMobilenum" press="onCallBusinessCard" text="{/Mobile}"/>
+     <ObjectAttribute id="businessWork" text="{i18n>Work}"/>
+     <ObjectAttribute active="true" id="businessTelephone" press="onCallBusinessCard"
+      text="{parts:[{path:'/Tel1Numbr'},{path:'/Tel1Ext'}],formatter:'.formatter.concat'}"/>
+     <ObjectAttribute id="businessEmail" text="{i18n>Email}"/>
+     <ObjectAttribute active="true" id="businessEmailAddr" press="onEmailBusinessCard" text="{/EMail}"/>
+    </attributes>
+   </ObjectHeader>
+  </content>
+ </Popover>
+</core:FragmentDefinition>

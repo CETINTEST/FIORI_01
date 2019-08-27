@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition xmlns:time="sap.suite.ui.commons" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+ xmlns:smartField="sap.ui.comp.smartfield" xmlns="sap.m">
+
+ <time:ProcessFlow id="itemProcessFlow" scrollable="true" foldedCorners="true" nodePress="onNodePress" nodes="{pf3>/nodes}" lanes="{pf3>/lanes}">
+  <time:nodes>
+   <time:ProcessFlowNode laneId="{pf3>lane}" nodeId="{pf3>id}" title="{pf3>title}" titleAbbreviation="{pf3>titleAbbreviation}"
+    children="{pf3>children}" state="{pf3>state}" stateText="{pf3>stateText}" texts="{pf3>texts}" focused="{pf3>focused}"/>
+  </time:nodes>
+  <time:lanes>
+   <time:ProcessFlowLaneHeader laneId="{pf3>id}" iconSrc="{pf3>icon}" text="{pf3>label}" position="{pf3>position}"/>
+  </time:lanes>
+ </time:ProcessFlow>
+</core:FragmentDefinition>

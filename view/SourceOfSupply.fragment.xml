@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!--
+
+    Copyright (C) 2009-2019 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+ <Table id="idProductsTable" inset="false" items="{ path: '/SourceOfSupplySet'}" noDataText="{i18n>supplier}"
+  updateFinished="onUpdateFinished">
+  <columns>
+   <Column demandPopin="true" hAlign="Left" minScreenWidth="Tablet" width="5rem">
+    <header></header>
+   </Column>
+   <Column demandPopin="true" hAlign="Left" minScreenWidth="Tablet" width="17rem">
+    <header></header>
+   </Column>
+   <Column demandPopin="true" hAlign="Center" minScreenWidth="Tablet" width="14rem">
+    <header></header>
+   </Column>
+   <Column demandPopin="true" hAlign="Right" minScreenWidth="Tablet" width="14rem">
+    <header></header>
+   </Column>
+   <Column demandPopin="true" hAlign="Right" minScreenWidth="Tablet" width="">
+    <header></header>
+   </Column>
+  </columns>
+  <ColumnListItem vAlign="Middle">
+   <core:Icon size="5rem" src="sap-icon://customer-and-supplier"></core:Icon>
+   <HBox>
+    <ObjectHeader>
+     <attributes>
+      <ObjectAttribute text="{Supplyingvendorname}"/>
+      <ObjectAttribute text="{Fixedsupplier}"/>
+      <ObjectAttribute text="{Supplier}"/>
+      <ObjectAttribute
+       text="{parts:[{path:'Purchasinginforecord'},{path:'Purchasingdocument'},{path:'Purcahnsingdocumentitem'} ],formatter:'.formatter.SourceOfSupply'}"/>
+     </attributes>
+    </ObjectHeader>
+   </HBox>
+   <Text/>
+   <ObjectHeader>
+    <attributes>
+     <ObjectAttribute text="{parts:[{path:'Netprice'},{path:'Purreqnitemcurrency'}], formatter:'.formatter.netPrice'}" title="{i18n>NetPrice}"/>
+    </attributes>
+   </ObjectHeader>
+   <Button press="onAssign" text="{i18n>Assign}" visible="true"/>
+  </ColumnListItem>
+ </Table>
+</core:FragmentDefinition>
